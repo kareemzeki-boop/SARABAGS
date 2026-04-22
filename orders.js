@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
-const db = require('../db/database');
+const db = require('./database');
 
 // Generate order reference
 const generateRef = () => {
