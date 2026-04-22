@@ -1,31 +1,30 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Serve index.html, admin.html etc as static files
-app.use(express.static(__dirname, { extensions: ['html'] }));
-
-// Middleware
-app.use(cors({ origin: '*', credentials: true }));
-app.use(express.json({ limit: '10mb' }));
+app.use(cors({
+  origin: '*', // tighten after launch
+  credentials: true
+}));
+app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ extended: true }));
 
-// API Routes
 app.use('/api/products', require('./products'));
 app.use('/api/orders',   require('./orders'));
+app.use('/api/promos',   require('./promos'));
 
-// Health check
-app.get('/health', function(_req, res) {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+app.get('/health', (_req, res) => {
+  res.json({ status: 'ok', service: 'Sara Bags API', timestamp: new Date().toISOString() });
 });
 
-// Start
-app.listen(PORT, function() {
-  console.log('Sara Bags running on port ' + PORT);
+app.use((_req, res) => res.status(404).json({ success: false, error: 'Not found' }));
+app.use((err, _req, res, _next) => {
+  console.error(err.stack);
+  res.status(500).json({ success: false, error: 'Server error' });
 });
 
+app.listen(PORT, () => console.log(`Sara Bags API running on port ${PORT}`));
 module.exports = app;
