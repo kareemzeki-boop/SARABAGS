@@ -28,7 +28,6 @@ if (process.env.NODE_ENV !== 'production') {
 // ─── ROUTES ──────────────────────────────────────────────────────────────────
 app.use('/api/products', require('./routes/products'));
 app.use('/api/orders',   require('./routes/orders'));
-
 // Health check
 app.get('/health', (_req, res) => {
   res.json({ status: 'ok', service: 'Sara Bags API', timestamp: new Date().toISOString() });
