@@ -1,424 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Sara Bags — Admin</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<style>
-  :root {
-    --bg: #f4f5f7; --card: #fff; --black: #1a1d23;
-    --accent: #3a4055; --muted: #8892a0; --border: #dde1e8;
-    --green: #1a7a3a; --green-bg: #e8f5ee;
-    --orange: #b85a00; --orange-bg: #fff3e8;
-    --blue: #1a4a8a; --blue-bg: #e8f0ff;
-    --red: #8a1a1a; --red-bg: #fde8e8;
-    --serif: 'Cormorant Garamond', serif;
-    --sans: 'DM Sans', sans-serif;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:var(--bg); font-family:var(--sans); min-height:100vh; }
-
-  /* LOGIN */
-  #login-screen {
-    min-height:100vh; display:flex; align-items:center; justify-content:center;
-    background:var(--black);
-  }
-  .login-box {
-    background:#fff; border-radius:24px; padding:48px 40px; width:360px;
-    text-align:center; box-shadow:0 40px 80px rgba(0,0,0,.3);
-  }
-  .login-logo { font-family:var(--serif); font-size:28px; font-weight:700; color:var(--black); margin-bottom:4px; }
-  .login-sub { font-size:13px; color:var(--muted); margin-bottom:32px; }
-  .login-input {
-    width:100%; background:var(--bg); border:1.5px solid var(--border); border-radius:12px;
-    padding:13px 16px; font-size:14px; font-family:var(--sans); color:var(--black); outline:none;
-    margin-bottom:12px;
-  }
-  .login-input:focus { border-color:var(--black); }
-  .login-btn {
-    width:100%; background:var(--black); color:#fff; border:none; border-radius:12px;
-    padding:14px; font-size:14px; font-weight:600; font-family:var(--sans); cursor:pointer;
-  }
-  .login-err { color:#c05020; font-size:12px; margin-top:8px; display:none; }
-
-  /* DASHBOARD */
-  #dashboard { display:none; }
-  .topbar {
-    background:var(--black); color:#fff; padding:16px 32px;
-    display:flex; align-items:center; justify-content:space-between;
-    position:sticky; top:0; z-index:10;
-  }
-  .topbar-logo { font-family:var(--serif); font-size:20px; font-weight:700; letter-spacing:.04em; }
-  .topbar-logo span { opacity:.5; font-weight:300; font-size:14px; margin-left:8px; }
-  .topbar-actions { display:flex; gap:12px; align-items:center; }
-  .topbar-btn {
-    padding:8px 16px; border-radius:8px; font-size:12px; font-weight:600;
-    font-family:var(--sans); cursor:pointer; border:1px solid rgba(255,255,255,.2);
-    color:rgba(255,255,255,.7); background:transparent; transition:all .2s;
-  }
-  .topbar-btn:hover { background:rgba(255,255,255,.1); color:#fff; }
-  .main { padding:32px; max-width:1200px; margin:0 auto; }
-
-  /* STATS */
-  .stats-row { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:32px; }
-  .stat-card { background:var(--card); border-radius:16px; padding:20px 24px; border:1px solid var(--border); }
-  .stat-label { font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:8px; }
-  .stat-val { font-family:var(--serif); font-size:32px; font-weight:700; color:var(--black); line-height:1; }
-  .stat-sub { font-size:12px; color:var(--muted); margin-top:4px; }
-
-  /* FILTERS */
-  .filters { display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; align-items:center; }
-  .filter-pill {
-    padding:7px 16px; border-radius:20px; font-size:13px; font-weight:500; cursor:pointer;
-    background:var(--card); border:1.5px solid var(--border); color:var(--black); transition:all .2s;
-  }
-  .filter-pill.on { background:var(--black); color:#fff; border-color:var(--black); }
-  .refresh-btn {
-    margin-left:auto; padding:8px 16px; background:var(--black); color:#fff;
-    border:none; border-radius:10px; font-size:13px; font-weight:600; cursor:pointer;
-    display:flex; align-items:center; gap:6px;
-  }
-
-  /* ORDERS TABLE */
-  .orders-wrap { background:var(--card); border-radius:20px; border:1px solid var(--border); overflow:hidden; }
-  .orders-table { width:100%; border-collapse:collapse; }
-  .orders-table th {
-    padding:14px 20px; text-align:left; font-size:11px; letter-spacing:.12em;
-    text-transform:uppercase; color:var(--muted); font-weight:600;
-    border-bottom:1px solid var(--border); background:#fafbfc;
-  }
-  .orders-table td { padding:16px 20px; border-bottom:1px solid var(--border); font-size:14px; color:var(--black); }
-  .orders-table tr:last-child td { border-bottom:none; }
-  .orders-table tr:hover td { background:#f8f9fb; }
-  .order-ref { font-family:var(--serif); font-weight:600; font-size:13px; color:var(--accent); }
-  .status-badge {
-    display:inline-flex; align-items:center; gap:5px;
-    padding:4px 10px; border-radius:20px; font-size:11px; font-weight:600; letter-spacing:.04em;
-  }
-  .status-pending  { background:#fff8e8; color:#8a6200; }
-  .status-confirmed{ background:var(--blue-bg); color:var(--blue); }
-  .status-shipped  { background:var(--orange-bg); color:var(--orange); }
-  .status-delivered{ background:var(--green-bg); color:var(--green); }
-  .status-cancelled{ background:var(--red-bg); color:var(--red); }
-
-  /* STATUS SELECT */
-  .status-select {
-    padding:5px 10px; border-radius:8px; font-size:12px; font-family:var(--sans);
-    border:1.5px solid var(--border); background:var(--bg); color:var(--black);
-    cursor:pointer; outline:none;
-  }
-
-  /* ORDER DETAIL PANEL */
-  .panel-overlay {
-    position:fixed; inset:0; background:rgba(0,0,0,.4); z-index:100;
-    display:none; backdrop-filter:blur(4px);
-  }
-  .panel-overlay.show { display:flex; align-items:flex-start; justify-content:flex-end; }
-  .panel {
-    background:#fff; width:420px; height:100vh; overflow-y:auto;
-    box-shadow:-20px 0 60px rgba(0,0,0,.2); padding:32px;
-  }
-  .panel-close {
-    position:absolute; top:16px; right:16px;
-    width:32px; height:32px; border-radius:50%; background:var(--bg);
-    border:none; cursor:pointer; display:flex; align-items:center; justify-content:center;
-    font-size:18px; color:var(--muted);
-  }
-  .panel-ref { font-family:var(--serif); font-size:22px; font-weight:700; color:var(--black); margin-bottom:4px; }
-  .panel-date { font-size:12px; color:var(--muted); margin-bottom:24px; }
-  .detail-section { margin-bottom:24px; }
-  .detail-section-title { font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:600; margin-bottom:12px; border-bottom:1px solid var(--border); padding-bottom:8px; }
-  .detail-row { display:flex; justify-content:space-between; align-items:flex-start; padding:8px 0; }
-  .detail-row-label { font-size:13px; color:var(--muted); }
-  .detail-row-val { font-size:13px; font-weight:600; color:var(--black); text-align:right; max-width:55%; }
-  .item-row { display:flex; align-items:center; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--border); }
-  .item-row:last-child { border-bottom:none; }
-  .item-name { font-size:13px; font-weight:600; color:var(--black); }
-  .item-detail { font-size:11px; color:var(--muted); margin-top:2px; }
-  .item-price { font-family:var(--serif); font-size:15px; font-weight:700; color:var(--black); }
-  .wa-link-btn {
-    display:flex; align-items:center; gap:8px; width:100%;
-    background:#25d366; color:#fff; border:none; border-radius:12px;
-    padding:14px; font-size:14px; font-weight:600; cursor:pointer;
-    text-decoration:none; justify-content:center; margin-top:16px;
-  }
-  .empty-state {
-    text-align:center; padding:60px 32px;
-    font-family:var(--serif); font-size:1.2rem; color:var(--muted); font-style:italic;
-  }
-  .loading-row { text-align:center; padding:40px; color:var(--muted); font-size:14px; }
-
-  @media(max-width:900px) {
-    .stats-row { grid-template-columns:1fr 1fr; }
-    .main { padding:20px; }
-    .topbar { padding:14px 20px; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sara Bags - Admin Dashboard</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #f4f4f4; }
+        .card { background: white; padding: 15px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        input, select, button { width: 100%; padding: 10px; margin: 5px 0; box-sizing: border-box; }
+        button { background: #000; color: white; border: none; cursor: pointer; }
+        .delete-btn { background: #ff4444; margin-top: 10px; }
+        .product-item { border-bottom: 1px solid #eee; padding: 10px 0; }
+    </style>
 </head>
 <body>
-
-<!-- LOGIN -->
-<div id="login-screen">
-  <div class="login-box">
-    <div class="login-logo">Sara Bags</div>
-    <div class="login-sub">Admin Dashboard</div>
-    <input class="login-input" type="password" id="admin-key" placeholder="Enter admin key" onkeydown="if(event.key==='Enter')login()"/>
-    <button class="login-btn" onclick="login()">Sign In</button>
-    <div class="login-err" id="login-err">Invalid admin key</div>
-  </div>
-</div>
-
-<!-- DASHBOARD -->
-<div id="dashboard">
-  <div class="topbar">
-    <div class="topbar-logo">Sara Bags <span>Admin</span></div>
-    <div class="topbar-actions">
-      <span id="api-status" style="font-size:12px;color:rgba(255,255,255,.5)">Connecting…</span>
-      <button class="topbar-btn" onclick="logout()">Sign Out</button>
-    </div>
-  </div>
-  <div class="main">
-    <!-- Stats -->
-    <div class="stats-row">
-      <div class="stat-card">
-        <div class="stat-label">Total Orders</div>
-        <div class="stat-val" id="stat-total">—</div>
-        <div class="stat-sub">All time</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Pending</div>
-        <div class="stat-val" id="stat-pending" style="color:#8a6200">—</div>
-        <div class="stat-sub">Awaiting confirmation</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Revenue</div>
-        <div class="stat-val" id="stat-revenue">—</div>
-        <div class="stat-sub">Total delivered</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Avg Order</div>
-        <div class="stat-val" id="stat-avg">—</div>
-        <div class="stat-sub">Per transaction</div>
-      </div>
-    </div>
-
-    <!-- Filters -->
-    <div class="filters">
-      <div class="filter-pill on" onclick="filterStatus(this,'')">All</div>
-      <div class="filter-pill" onclick="filterStatus(this,'pending')">Pending</div>
-      <div class="filter-pill" onclick="filterStatus(this,'confirmed')">Confirmed</div>
-      <div class="filter-pill" onclick="filterStatus(this,'shipped')">Shipped</div>
-      <div class="filter-pill" onclick="filterStatus(this,'delivered')">Delivered</div>
-      <div class="filter-pill" onclick="filterStatus(this,'cancelled')">Cancelled</div>
-      <button class="refresh-btn" onclick="loadOrders()">↻ Refresh</button>
-    </div>
-
-    <!-- Orders table -->
-    <div class="orders-wrap">
-      <table class="orders-table">
-        <thead>
-          <tr>
-            <th>Ref</th>
-            <th>Customer</th>
-            <th>Items</th>
-            <th>Total</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody id="orders-tbody">
-          <tr><td colspan="7" class="loading-row">Loading orders…</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-<!-- ORDER DETAIL PANEL -->
-<div class="panel-overlay" id="panel-overlay" onclick="closePanel(event)">
-  <div class="panel" id="order-panel">
-    <button class="panel-close" onclick="closePanelDirect()">×</button>
-    <div id="panel-content"></div>
-  </div>
-</div>
-
-<script>
-const API = 'http://localhost:3001/api'; // Update to your Railway URL
-let ADMIN_KEY = '';
-let allOrders = [];
-let currentFilter = '';
-
-async function login() {
-  const key = document.getElementById('admin-key').value.trim();
-  if (!key) return;
-
-  try {
-    const r = await fetch(`${API}/orders?limit=1`, {
-      headers: { 'x-admin-key': key },
-      signal: AbortSignal.timeout(5000)
-    });
-    if (r.status === 401) throw new Error('Invalid key');
-    if (!r.ok) throw new Error('Server error');
-
-    ADMIN_KEY = key;
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('dashboard').style.display = 'block';
-    document.getElementById('api-status').textContent = '● Live';
-    document.getElementById('api-status').style.color = '#4ade80';
-    loadOrders();
-  } catch (e) {
-    document.getElementById('login-err').style.display = 'block';
-    document.getElementById('login-err').textContent = e.message === 'Invalid key' ? 'Invalid admin key' : 'Cannot connect to API';
-  }
-}
-
-function logout() {
-  ADMIN_KEY = '';
-  document.getElementById('login-screen').style.display = 'flex';
-  document.getElementById('dashboard').style.display = 'none';
-  document.getElementById('admin-key').value = '';
-}
-
-async function loadOrders() {
-  try {
-    const url = currentFilter ? `${API}/orders?status=${currentFilter}&limit=100` : `${API}/orders?limit=100`;
-    const r = await fetch(url, { headers: { 'x-admin-key': ADMIN_KEY } });
-    const j = await r.json();
-    if (!j.success) throw new Error(j.error);
-    allOrders = j.data;
-    renderOrders(allOrders);
-    calcStats(allOrders);
-  } catch (e) {
-    document.getElementById('orders-tbody').innerHTML = `<tr><td colspan="7" class="loading-row" style="color:#c05020">Error: ${e.message}</td></tr>`;
-  }
-}
-
-function renderOrders(orders) {
-  const tb = document.getElementById('orders-tbody');
-  if (!orders.length) {
-    tb.innerHTML = `<tr><td colspan="7"><div class="empty-state">No orders found.</div></td></tr>`;
-    return;
-  }
-
-  tb.innerHTML = orders.map(o => `
-    <tr style="cursor:pointer" onclick="openPanel('${o.order_ref}')">
-      <td><span class="order-ref">${o.order_ref}</span></td>
-      <td>
-        <div style="font-weight:600;font-size:14px">${o.customer_name}</div>
-        <div style="font-size:12px;color:var(--muted)">${o.customer_phone}</div>
-      </td>
-      <td style="color:var(--muted);font-size:13px">${o.items.length} item${o.items.length!==1?'s':''}</td>
-      <td style="font-family:var(--serif);font-size:15px;font-weight:700">$${o.total}</td>
-      <td style="font-size:12px;color:var(--muted)">${new Date(o.created_at).toLocaleDateString('en-AE',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</td>
-      <td><span class="status-badge status-${o.status}">${o.status}</span></td>
-      <td onclick="event.stopPropagation()">
-        <select class="status-select" onchange="updateStatus('${o.order_ref}',this.value)">
-          ${['pending','confirmed','shipped','delivered','cancelled'].map(s => `<option ${s===o.status?'selected':''}>${s}</option>`).join('')}
+    <h1>Sara Bags Admin</h1>
+    
+    <div class="card">
+        <h3>Add New Product</h3>
+        <input type="text" id="p-name" placeholder="Product Name">
+        <input type="number" id="p-price" placeholder="Price (AED)">
+        <select id="p-cat">
+            <option value="Clasp">Clasp</option>
+            <option value="Wristlet">Wristlet</option>
+            <option value="Clutch">Clutch</option>
+            <option value="Canvas">Canvas</option>
         </select>
-      </td>
-    </tr>
-  `).join('');
-}
-
-async function updateStatus(ref, status) {
-  try {
-    const r = await fetch(`${API}/orders/${ref}/status`, {
-      method: 'PATCH',
-      headers: { 'Content-Type':'application/json', 'x-admin-key': ADMIN_KEY },
-      body: JSON.stringify({ status })
-    });
-    const j = await r.json();
-    if (j.success) loadOrders();
-  } catch {}
-}
-
-function calcStats(orders) {
-  document.getElementById('stat-total').textContent = orders.length;
-  document.getElementById('stat-pending').textContent = orders.filter(o=>o.status==='pending').length;
-  const revenue = orders.filter(o=>o.status==='delivered').reduce((s,o)=>s+o.total,0);
-  document.getElementById('stat-revenue').textContent = revenue ? '$'+Math.round(revenue) : '$0';
-  const avg = orders.length ? Math.round(orders.reduce((s,o)=>s+o.total,0)/orders.length) : 0;
-  document.getElementById('stat-avg').textContent = avg ? '$'+avg : '$0';
-}
-
-function filterStatus(el, status) {
-  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('on'));
-  el.classList.add('on');
-  currentFilter = status;
-  loadOrders();
-}
-
-function openPanel(ref) {
-  const order = allOrders.find(o => o.order_ref === ref);
-  if (!order) return;
-
-  const itemRows = order.items.map(item => `
-    <div class="item-row">
-      <div>
-        <div class="item-name">${item.name}</div>
-        <div class="item-detail">${item.colour} · x${item.qty}</div>
-      </div>
-      <div class="item-price">$${item.line_total}</div>
-    </div>
-  `).join('');
-
-  // Build WhatsApp link
-  const itemLines = order.items.map(i=>`• ${i.name} (${i.colour}) x${i.qty} — $${i.line_total}`).join('%0A');
-  const waMsg = encodeURIComponent(`Order Update — Ref: ${order.order_ref}\nStatus: ${order.status}`);
-  const waLink = `https://wa.me/${order.customer_phone.replace(/\D/g,'')}?text=${waMsg}`;
-
-  document.getElementById('panel-content').innerHTML = `
-    <div class="panel-ref">${order.order_ref}</div>
-    <div class="panel-date">${new Date(order.created_at).toLocaleString('en-AE')}</div>
-
-    <div class="detail-section">
-      <div class="detail-section-title">Customer</div>
-      <div class="detail-row"><span class="detail-row-label">Name</span><span class="detail-row-val">${order.customer_name}</span></div>
-      <div class="detail-row"><span class="detail-row-label">Phone</span><span class="detail-row-val">${order.customer_phone}</span></div>
-      ${order.customer_email ? `<div class="detail-row"><span class="detail-row-label">Email</span><span class="detail-row-val">${order.customer_email}</span></div>` : ''}
-      ${order.notes ? `<div class="detail-row"><span class="detail-row-label">Notes</span><span class="detail-row-val">${order.notes}</span></div>` : ''}
+        <input type="text" id="p-img" placeholder="Image Key (e.g. orange_clasp)">
+        <button onclick="addProduct()">Add Product</button>
     </div>
 
-    <div class="detail-section">
-      <div class="detail-section-title">Items</div>
-      ${itemRows}
+    <div class="card">
+        <h3>Active Offers</h3>
+        <input type="text" id="promo-code" placeholder="Code (e.g. SUMMER20)">
+        <input type="number" id="promo-disc" placeholder="Discount Value">
+        <select id="promo-type">
+            <option value="percent">Percentage (%)</option>
+            <option value="fixed">Fixed Amount</option>
+        </select>
+        <button onclick="addPromo()">Create Offer</button>
+        <div id="promo-list"></div>
     </div>
 
-    <div class="detail-section">
-      <div class="detail-section-title">Payment</div>
-      <div class="detail-row"><span class="detail-row-label">Subtotal</span><span class="detail-row-val">$${order.subtotal}</span></div>
-      <div class="detail-row"><span class="detail-row-label">Delivery</span><span class="detail-row-val">${order.delivery_option === 'try_on' ? 'Try On (+$15)' : 'Standard (Free)'}</span></div>
-      ${order.discount > 0 ? `<div class="detail-row"><span class="detail-row-label">Discount (${order.promo_code})</span><span class="detail-row-val" style="color:var(--green)">-$${order.discount}</span></div>` : ''}
-      <div class="detail-row"><span class="detail-row-label" style="font-weight:700">Total</span><span class="detail-row-val" style="font-family:var(--serif);font-size:18px">$${order.total}</span></div>
+    <div class="card">
+        <h3>Manage Inventory</h3>
+        <div id="inventory-list"></div>
     </div>
 
-    <div class="detail-section">
-      <div class="detail-section-title">Update Status</div>
-      <select class="status-select" style="width:100%;padding:12px 14px;border-radius:12px;" onchange="updateStatus('${order.order_ref}',this.value)">
-        ${['pending','confirmed','shipped','delivered','cancelled'].map(s=>`<option ${s===order.status?'selected':''}>${s}</option>`).join('')}
-      </select>
-    </div>
+    <script>
+        const API = 'https://sarabags-production.up.railway.app/api';
+        const ADMIN_KEY = prompt("Enter Admin Key:");
 
-    <a href="${waLink}" target="_blank" class="wa-link-btn">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.548 4.078 1.505 5.796L.057 23.994l6.345-1.62A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-4.988-1.361l-.356-.212-3.694.944.984-3.593-.232-.37A9.774 9.774 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-      Message Customer
-    </a>
-  `;
+        const headers = { 
+            'Content-Type': 'application/json',
+            'x-admin-key': ADMIN_KEY 
+        };
 
-  document.getElementById('panel-overlay').classList.add('show');
-}
+        async function loadData() {
+            // Load Products
+            const pRes = await fetch(`${API}/products`);
+            const products = await pRes.json();
+            document.getElementById('inventory-list').innerHTML = products.map(p => `
+                <div class="product-item">
+                    <strong>${p.name}</strong> - ${p.price} AED
+                    <button class="delete-btn" onclick="deleteItem('products', ${p.id})">Remove</button>
+                </div>
+            `).join('');
 
-function closePanel(e) {
-  if (e.target === document.getElementById('panel-overlay')) closePanelDirect();
-}
-function closePanelDirect() {
-  document.getElementById('panel-overlay').classList.remove('show');
-}
+            // Load Promos
+            const prRes = await fetch(`${API}/promos/all`, { headers });
+            const promos = await prRes.json();
+            document.getElementById('promo-list').innerHTML = promos.map(p => `
+                <div class="product-item">
+                    ${p.code} (${p.discount}${p.type === 'percent' ? '%' : ' AED'})
+                    <button class="delete-btn" onclick="deleteItem('promos', ${p.id})">Remove Code</button>
+                </div>
+            `).join('');
+        }
 
-// Auto-refresh every 60s
-setInterval(() => { if (ADMIN_KEY) loadOrders(); }, 60000);
-</script>
+        async function addProduct() {
+            const body = {
+                name: document.getElementById('p-name').value,
+                price: parseFloat(document.getElementById('p-price').value),
+                category: document.getElementById('p-cat').value,
+                image_key: document.getElementById('p-img').value,
+                active: 1
+            };
+            await fetch(`${API}/products`, { method: 'POST', headers, body: JSON.stringify(body) });
+            loadData();
+        }
+
+        async function addPromo() {
+            const body = {
+                code: document.getElementById('promo-code').value,
+                discount: parseFloat(document.getElementById('promo-disc').value),
+                type: document.getElementById('promo-type').value
+            };
+            await fetch(`${API}/promos`, { method: 'POST', headers, body: JSON.stringify(body) });
+            loadData();
+        }
+
+        async function deleteItem(type, id) {
+            if(confirm('Are you sure?')) {
+                await fetch(`${API}/${type}/${id}`, { method: 'DELETE', headers });
+                loadData();
+            }
+        }
+
+        loadData();
+    </script>
 </body>
 </html>
