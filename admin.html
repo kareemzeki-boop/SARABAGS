@@ -27,7 +27,7 @@ body{font-family:var(--sans);background:var(--bg);min-height:100vh;color:var(--b
 .lw{font-family:var(--serif);font-size:30px;font-weight:700;letter-spacing:.06em;margin-bottom:4px}
 .ls{font-size:13px;color:var(--muted);margin-bottom:36px}
 .ll{display:block;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
-.li{width:100%;padding:13px 15px;border:1.5px solid var(--border);border-radius:var(--r);font-size:14px;font-family:var(--sans);color:var(--black);background:var(--bg);outline:none;transition:border-color .2s;margin-bottom:14px}
+.li{width:100%;padding:13px 15px;border:1.5px solid var(--border);border-radius:var(--r);font-size:14px;font-family:var(--sans);color:var(--black);background:var(--bg);outline:none;transition:border-color .18s}
 .li:focus{border-color:var(--black);background:#fff}
 .lb{width:100%;padding:14px;background:var(--black);color:#fff;border:none;border-radius:var(--r);font-size:14px;font-weight:600;font-family:var(--sans);cursor:pointer}
 .lb:hover{opacity:.85}
@@ -40,7 +40,7 @@ body{font-family:var(--sans);background:var(--bg);min-height:100vh;color:var(--b
 .s-logo{font-family:var(--serif);font-size:20px;font-weight:700;letter-spacing:.06em;padding:28px 24px 8px}
 .s-logo span{display:block;font-family:var(--sans);font-size:11px;font-weight:400;opacity:.4;letter-spacing:.14em;text-transform:uppercase;margin-top:2px}
 .s-nav{flex:1;padding:16px 12px;display:flex;flex-direction:column;gap:4px}
-.ni{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:10px;font-size:13px;font-weight:500;color:rgba(255,255,255,.55);cursor:pointer;transition:all .18s;border:none;background:none;width:100%;text-align:left}
+.ni{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:10px;font-size:13px;font-weight:500;color:rgba(255,255,255,.55);cursor:pointer;transition:all .18s;border:none;background:none}
 .ni:hover{color:rgba(255,255,255,.9);background:rgba(255,255,255,.07)}
 .ni.active{color:#fff;background:rgba(255,255,255,.14)}
 .s-foot{padding:16px 12px 24px}
@@ -134,7 +134,8 @@ tbody tr:hover td{background:#f8f9fb}
 .in{font-size:13px;font-weight:600}
 .id2{font-size:11px;color:var(--muted);margin-top:2px}
 .ip{font-family:var(--serif);font-size:16px;font-weight:700}
-.wa-btn{display:flex;align-items:center;justify-content:center;gap:9px;background:#25d366;color:#fff;border:none;border-radius:var(--r);padding:14px;width:100%;font-size:14px;font-weight:600;cursor:pointer;margin-top:18px;text-decoration:none}
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:9px;background:#25d366;color:#fff;border:none;border-radius:var(--r);padding:14px;width:100%;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;transition:opacity .18s}
+.wa-btn:hover{opacity:.9}
 
 /* MODAL */
 .mw{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
@@ -167,7 +168,7 @@ textarea.fi{resize:vertical;min-height:78px}
 .acr button{padding:8px 16px;background:var(--black);color:#fff;border:none;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
 
 /* TOAST */
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(12px);background:var(--black);color:#fff;padding:11px 22px;border-radius:12px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:all .28s;pointer-events:none;white-space:nowrap}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(12px);background:var(--black);color:#fff;padding:11px 22px;border-radius:12px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:all .2s}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .tok{background:#1a7a3a}.terr{background:#8a1a1a}
 
@@ -180,7 +181,7 @@ textarea.fi{resize:vertical;min-height:78px}
 /* MOBILE BOTTOM NAV */
 .mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--sidebar);z-index:90;padding:8px 0 env(safe-area-inset-bottom,8px);border-top:1px solid rgba(255,255,255,.08)}
 .mob-nav-inner{display:flex;justify-content:space-around;align-items:center}
-.mni{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 20px;border:none;background:none;color:rgba(255,255,255,.45);cursor:pointer;font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border-radius:12px;transition:color .18s}
+.mni{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 20px;border:none;background:none;color:rgba(255,255,255,.45);cursor:pointer;font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.1em;transition:color .18s}
 .mni .mni-icon{font-size:20px;line-height:1}
 .mni.active{color:#fff}
 .mni.active .mni-icon{transform:scale(1.1)}
@@ -447,7 +448,7 @@ async function login(){
     loadOrders();
   }catch(ex){e.textContent=ex.message;}
 }
-function logout(){KEY='';document.getElementById('dashboard').style.display='none';document.getElementById('login-screen').style.display='flex';document.getElementById('admin-key').value='';document.getElementById('mob-nav').style.display='none';}
+function logout(){KEY='';document.getElementById('dashboard').style.display='none';document.getElementById('login-screen').style.display='flex';document.getElementById('admin-key').value='';document.getElementById('api-dot').textContent='● Connecting…';document.getElementById('api-dot').style.color='rgba(255,255,255,.3)';}
 
 /* ── MOBILE NAV ───────────────────────────────────── */
 function showPageMob(n,el){
@@ -562,7 +563,7 @@ function openPanel(ref){
       </select>
     </div>
     <a href="https://wa.me/${waN}?text=${waM}" target="_blank" class="wa-btn">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.548 4.078 1.505 5.796L.057 23.994l6.345-1.62A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-4.988-1.361l-.356-.212-3.694.944.984-3.593-.232-.37A9.774 9.774 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.195-.57-.027-.223-.223-.835-.857-1.02-1.035-.186-.179-.307-.199-.504.004-.197.202-.76.944-.929 1.136-.169.192-.339.216-.536.019-.197-.198-1.044-1.224-1.62-1.898-.6-.702-1.007-1.573-1.124-1.77-.117-.198-.02-.304.088-.403.086-.083.192-.216.288-.325.095-.109.127-.192.19-.32.062-.127.031-.239-.016-.335-.047-.095-.448-1.078-.615-1.475-.162-.388-.326-.335-.449-.34-.115-.007-.247-.007-.379-.007-.131 0-.344.05-.524.237-.18.187-.691.676-.691 1.646 0 .97.71 1.91.808 2.04.098.129 1.39 2.122 3.369 2.976 2.023.87 2.822.805 3.334.76.511-.045 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.345m-5.421-7.403h-.004c-3.582 0-6.917-2.916-6.917-6.498 0-3.582 3.335-6.497 6.917-6.497 3.581 0 6.916 2.916 6.916 6.497 0 3.582-3.335 6.498-6.916 6.498m5.221-12.49C11.463 2.969 6.823 2 3.6 5.146 1.624 7.062.623 9.657.623 12.414c0 2.757 1.001 5.352 2.977 7.268l-1.193 3.671c-.496 1.53.823 2.771 2.1 2.231l3.384-1.691c1.944.529 3.99.529 5.934 0l3.384 1.691c1.278.54 2.596-.702 2.1-2.231l-1.192-3.671c1.976-1.916 2.977-4.511 2.977-7.268 0-2.757-1.001-5.352-2.977-7.268" fill="currentColor"/></svg>
       Send WhatsApp Update
     </a>`;
   document.getElementById('pov').classList.add('open');
