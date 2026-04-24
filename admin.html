@@ -27,7 +27,7 @@ body{font-family:var(--sans);background:var(--bg);min-height:100vh;color:var(--b
 .lw{font-family:var(--serif);font-size:30px;font-weight:700;letter-spacing:.06em;margin-bottom:4px}
 .ls{font-size:13px;color:var(--muted);margin-bottom:36px}
 .ll{display:block;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
-.li{width:100%;padding:13px 15px;border:1.5px solid var(--border);border-radius:var(--r);font-size:14px;font-family:var(--sans);color:var(--black);background:var(--bg);outline:none;transition:border-color .2s;margin-bottom:14px}
+.li{width:100%;padding:13px 15px;border:1.5px solid var(--border);border-radius:var(--r);font-size:14px;font-family:var(--sans);color:var(--black);background:var(--bg);outline:none;transition:border-color .18s}
 .li:focus{border-color:var(--black);background:#fff}
 .lb{width:100%;padding:14px;background:var(--black);color:#fff;border:none;border-radius:var(--r);font-size:14px;font-weight:600;font-family:var(--sans);cursor:pointer}
 .lb:hover{opacity:.85}
@@ -40,7 +40,7 @@ body{font-family:var(--sans);background:var(--bg);min-height:100vh;color:var(--b
 .s-logo{font-family:var(--serif);font-size:20px;font-weight:700;letter-spacing:.06em;padding:28px 24px 8px}
 .s-logo span{display:block;font-family:var(--sans);font-size:11px;font-weight:400;opacity:.4;letter-spacing:.14em;text-transform:uppercase;margin-top:2px}
 .s-nav{flex:1;padding:16px 12px;display:flex;flex-direction:column;gap:4px}
-.ni{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:10px;font-size:13px;font-weight:500;color:rgba(255,255,255,.55);cursor:pointer;transition:all .18s;border:none;background:none;width:100%;text-align:left}
+.ni{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:10px;font-size:13px;font-weight:500;color:rgba(255,255,255,.55);cursor:pointer;transition:all .18s;border:none;background:none}
 .ni:hover{color:rgba(255,255,255,.9);background:rgba(255,255,255,.07)}
 .ni.active{color:#fff;background:rgba(255,255,255,.14)}
 .s-foot{padding:16px 12px 24px}
@@ -92,6 +92,7 @@ tbody tr:hover td{background:#f8f9fb}
 .bdl{background:var(--green-bg);color:var(--green)}
 .bca{background:var(--red-bg);color:var(--red)}
 .bhid{background:var(--red-bg);color:var(--red);font-size:10px}
+
 .ssel{padding:6px 10px;border-radius:8px;font-size:12px;font-family:var(--sans);border:1.5px solid var(--border);background:var(--bg);color:var(--black);cursor:pointer;outline:none}
 
 /* PRODUCTS */
@@ -133,7 +134,8 @@ tbody tr:hover td{background:#f8f9fb}
 .in{font-size:13px;font-weight:600}
 .id2{font-size:11px;color:var(--muted);margin-top:2px}
 .ip{font-family:var(--serif);font-size:16px;font-weight:700}
-.wa-btn{display:flex;align-items:center;justify-content:center;gap:9px;background:#25d366;color:#fff;border:none;border-radius:var(--r);padding:14px;width:100%;font-size:14px;font-weight:600;cursor:pointer;margin-top:18px;text-decoration:none}
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:9px;background:#25d366;color:#fff;border:none;border-radius:var(--r);padding:14px;width:100%;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;transition:opacity .18s}
+.wa-btn:hover{opacity:.9}
 
 /* MODAL */
 .mw{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
@@ -153,6 +155,8 @@ textarea.fi{resize:vertical;min-height:78px}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .fhint{font-size:11px;color:var(--muted);margin-top:5px}
 .ferr{color:#c05020;font-size:12px;margin-top:10px;display:none}
+.iprev{width:100%;height:150px;border-radius:var(--r);object-fit:cover;margin-top:8px;border:1.5px solid var(--border);display:none}
+.iprev.show{display:block}
 .fac{display:flex;gap:10px;justify-content:flex-end;padding-top:12px;border-top:1px solid var(--border);margin-top:4px}
 
 /* CHIPS */
@@ -163,24 +167,8 @@ textarea.fi{resize:vertical;min-height:78px}
 .acr input{flex:1}
 .acr button{padding:8px 16px;background:var(--black);color:#fff;border:none;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
 
-/* IMAGE UPLOAD */
-.upzone{border:2px dashed var(--border);border-radius:var(--r);text-align:center;cursor:pointer;transition:all .2s;background:var(--bg);position:relative;overflow:hidden;min-height:110px;display:flex;align-items:center;justify-content:center}
-.upzone:hover,.upzone.drag{border-color:var(--black);background:#f4f5f8}
-.upzone-inner{padding:24px 20px;pointer-events:none}
-.upzone-icon{font-size:32px;margin-bottom:8px}
-.upzone-lbl{font-size:13px;font-weight:600;color:var(--black)}
-.upzone-sub{font-size:11px;color:var(--muted);margin-top:3px}
-.up-preview{width:100%;height:170px;object-fit:cover;display:none;border-radius:calc(var(--r) - 2px)}
-.upclear{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.65);color:#fff;border:none;border-radius:50%;width:28px;height:28px;font-size:16px;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:3;line-height:1}
-.upalts{font-size:11px;color:var(--muted);margin-top:8px}
-.upalts a{color:var(--accent);cursor:pointer;font-weight:600;text-decoration:underline}
-.img-slot{min-height:90px;position:relative}
-.slot-ph{padding:16px 8px!important}
-.slot-badge{position:absolute;top:6px;left:7px;background:var(--black);color:#fff;border-radius:50%;width:18px;height:18px;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:2}
-.slot-img{height:90px!important}
-
 /* TOAST */
-.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(12px);background:var(--black);color:#fff;padding:11px 22px;border-radius:12px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:all .28s;pointer-events:none;white-space:nowrap}
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(12px);background:var(--black);color:#fff;padding:11px 22px;border-radius:12px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:all .2s}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .tok{background:#1a7a3a}.terr{background:#8a1a1a}
 
@@ -193,22 +181,18 @@ textarea.fi{resize:vertical;min-height:78px}
 /* MOBILE BOTTOM NAV */
 .mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--sidebar);z-index:90;padding:8px 0 env(safe-area-inset-bottom,8px);border-top:1px solid rgba(255,255,255,.08)}
 .mob-nav-inner{display:flex;justify-content:space-around;align-items:center}
-.mni{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 20px;border:none;background:none;color:rgba(255,255,255,.45);cursor:pointer;font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border-radius:12px;transition:color .18s}
+.mni{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 20px;border:none;background:none;color:rgba(255,255,255,.45);cursor:pointer;font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.1em;transition:color .18s}
 .mni .mni-icon{font-size:20px;line-height:1}
 .mni.active{color:#fff}
+.mni.active .mni-icon{transform:scale(1.1)}
 
 @media(max-width:900px){
   .sidebar{display:none}
   .mob-nav{display:block}
-  .main{padding-bottom:80px}
+  .main{padding-bottom:72px}
   .sr{grid-template-columns:1fr 1fr}
-  .page{padding:20px}
-  .pg{grid-template-columns:1fr}
-  .frow{grid-template-columns:1fr}
-  .panel{width:100%}
-  .modal{max-height:96vh;border-radius:20px}
-  .mbody{padding:20px}
-  .mhd{padding:20px 20px 16px}
+  .page{padding:20px}.pg{grid-template-columns:1fr}
+  .frow{grid-template-columns:1fr}.panel{width:100%}
 }
 </style>
 </head>
@@ -220,7 +204,8 @@ textarea.fi{resize:vertical;min-height:78px}
     <div class="lw">Sara Bags</div>
     <div class="ls">Admin Dashboard</div>
     <label class="ll">Admin Key</label>
-    <input class="li" type="password" id="admin-key" placeholder="Enter your admin key" onkeydown="if(event.key==='Enter')login()"/>
+    <input class="li" type="password" id="admin-key" placeholder="Enter your admin key"
+      onkeydown="if(event.key==='Enter')login()"/>
     <button class="lb" onclick="login()">Sign In</button>
     <div class="le" id="login-err"></div>
   </div>
@@ -245,7 +230,7 @@ textarea.fi{resize:vertical;min-height:78px}
 
     <div class="main">
 
-      <!-- ORDERS PAGE -->
+      <!-- ORDERS -->
       <div id="page-orders" class="page active">
         <div class="ph">
           <div><div class="pt">Orders</div><div class="ps">All customer orders, live</div></div>
@@ -279,7 +264,7 @@ textarea.fi{resize:vertical;min-height:78px}
         </div>
       </div>
 
-      <!-- PRODUCTS PAGE -->
+      <!-- PRODUCTS -->
       <div id="page-products" class="page">
         <div class="ph">
           <div><div class="pt">Products</div><div class="ps">Manage your bag catalogue</div></div>
@@ -288,7 +273,7 @@ textarea.fi{resize:vertical;min-height:78px}
         <div class="pg" id="pg"><div style="padding:40px;text-align:center;color:var(--muted)">Loading…</div></div>
       </div>
 
-      <!-- PROMOS PAGE -->
+      <!-- PROMOS -->
       <div id="page-promos" class="page">
         <div class="ph">
           <div><div class="pt">Promo Codes</div><div class="ps">Create and manage discount codes</div></div>
@@ -306,7 +291,7 @@ textarea.fi{resize:vertical;min-height:78px}
   </div>
 </div>
 
-<!-- ORDER SIDE PANEL -->
+<!-- SIDE PANEL -->
 <div class="ov" id="pov" onclick="closePO(event)">
   <div class="panel">
     <button class="pcx" onclick="closeP()">×</button>
@@ -323,19 +308,15 @@ textarea.fi{resize:vertical;min-height:78px}
     </div>
     <div class="mbody">
       <input type="hidden" id="pm-id"/>
-
       <div class="frow">
         <div class="fg"><label class="fl">Product Name *</label><input class="fi" id="pm-name" placeholder="e.g. The Aurora Clasp"/></div>
         <div class="fg"><label class="fl">Subtitle</label><input class="fi" id="pm-sub" placeholder="e.g. Pebble-grain · Pearls"/></div>
       </div>
-
       <div class="fg"><label class="fl">Description</label><textarea class="fi" id="pm-desc" placeholder="Describe the bag…"></textarea></div>
-
       <div class="frow">
         <div class="fg"><label class="fl">Price (AED) *</label><input class="fi" id="pm-price" type="number" min="0" step="0.01" placeholder="285"/></div>
         <div class="fg"><label class="fl">Category</label><input class="fi" id="pm-cat" placeholder="e.g. Clasp / Clutch / Wristlet"/></div>
       </div>
-
       <div class="frow">
         <div class="fg">
           <label class="fl">Background Text</label>
@@ -345,42 +326,15 @@ textarea.fi{resize:vertical;min-height:78px}
         <div class="fg">
           <label class="fl">Image Key</label>
           <input class="fi" id="pm-ik" placeholder="e.g. orange_clasp"/>
-          <div class="fhint">Maps to image in your frontend</div>
+          <div class="fhint">Maps to image in your frontend code</div>
         </div>
       </div>
-
-      <!-- IMAGE UPLOAD — up to 3 slots -->
       <div class="fg">
-        <label class="fl">Product Images <em style="text-transform:none;font-style:normal;font-weight:400;color:var(--muted)">(up to 3 — first is main)</em></label>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:6px">
-          <div class="upzone img-slot" id="slot-0" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handleDropSlot(event,0)" onclick="triggerSlot(event,0)">
-            <div class="upzone-inner slot-ph" id="slot-ph-0"><div class="upzone-icon" style="font-size:22px">📷</div><div class="upzone-lbl" style="font-size:11px">Main photo</div></div>
-            <img class="up-preview slot-img" id="prev-0" alt=""/>
-            <button class="upclear slot-clr" id="clr-0" onclick="clearSlot(event,0)">×</button>
-            <div class="slot-badge">1</div>
-          </div>
-          <div class="upzone img-slot" id="slot-1" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handleDropSlot(event,1)" onclick="triggerSlot(event,1)">
-            <div class="upzone-inner slot-ph" id="slot-ph-1"><div class="upzone-icon" style="font-size:22px">🖼️</div><div class="upzone-lbl" style="font-size:11px">Photo 2</div></div>
-            <img class="up-preview slot-img" id="prev-1" alt=""/>
-            <button class="upclear slot-clr" id="clr-1" onclick="clearSlot(event,1)">×</button>
-            <div class="slot-badge">2</div>
-          </div>
-          <div class="upzone img-slot" id="slot-2" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handleDropSlot(event,2)" onclick="triggerSlot(event,2)">
-            <div class="upzone-inner slot-ph" id="slot-ph-2"><div class="upzone-icon" style="font-size:22px">🖼️</div><div class="upzone-lbl" style="font-size:11px">Photo 3</div></div>
-            <img class="up-preview slot-img" id="prev-2" alt=""/>
-            <button class="upclear slot-clr" id="clr-2" onclick="clearSlot(event,2)">×</button>
-            <div class="slot-badge">3</div>
-          </div>
-        </div>
-        <input type="file" id="pm-file-0" accept="image/*" style="display:none" onchange="handleFileSlot(this.files[0],0)"/>
-        <input type="file" id="pm-file-1" accept="image/*" style="display:none" onchange="handleFileSlot(this.files[0],1)"/>
-        <input type="file" id="pm-file-2" accept="image/*" style="display:none" onchange="handleFileSlot(this.files[0],2)"/>
-        <input type="hidden" id="pm-img-val"/>
-        <input type="hidden" id="pm-img-val-1"/>
-        <input type="hidden" id="pm-img-val-2"/>
-        <div class="fhint">Tap a slot to upload · drag &amp; drop works · first image is the main display photo</div>
+        <label class="fl">Image URL <em style="text-transform:none;font-style:normal;font-weight:400;color:var(--muted)">(paste any direct image link)</em></label>
+        <input class="fi" id="pm-iu" placeholder="https://i.imgur.com/… or any direct image URL" oninput="prevI(this.value)"/>
+        <img id="pm-prev" class="iprev" alt="Preview"/>
+        <div class="fhint">If set, overrides the image key and shows this image directly</div>
       </div>
-
       <div class="fg">
         <label class="fl">Available Colours</label>
         <div class="acr">
@@ -389,7 +343,6 @@ textarea.fi{resize:vertical;min-height:78px}
         </div>
         <div class="chips" id="pm-chips"></div>
       </div>
-
       <div class="fg">
         <label class="fl">Visibility</label>
         <select class="fi" id="pm-act">
@@ -397,7 +350,6 @@ textarea.fi{resize:vertical;min-height:78px}
           <option value="0">Hidden — not shown to customers</option>
         </select>
       </div>
-
       <div class="ferr" id="pm-err"></div>
       <div class="fac">
         <button class="btn bg" onclick="closePM()">Cancel</button>
@@ -474,377 +426,253 @@ textarea.fi{resize:vertical;min-height:78px}
 </nav>
 
 <script>
-const API = 'https://sarabags-production.up.railway.app/api';
-let KEY = '', allOrders = [], sf = '', pmC = [], editPID = null, editPRID = null, toastT;
+const API='https://sarabags-production.up.railway.app/api';
+let KEY='',allOrders=[],sf='',pmC=[],editPID=null,editPRID=null,toastT;
 
 /* ── AUTH ─────────────────────────────────────────── */
-async function login() {
-  const k = document.getElementById('admin-key').value.trim();
-  const e = document.getElementById('login-err');
-  e.textContent = '';
-  if (!k) { e.textContent = 'Please enter your admin key'; return; }
-  try {
-    const r = await fetch(`${API}/orders?limit=1`, { headers: { 'x-admin-key': k }, signal: AbortSignal.timeout(8000) });
-    if (r.status === 401) throw new Error('Invalid admin key');
-    if (!r.ok) throw new Error('Cannot connect — check Railway is running');
-    KEY = k;
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('dashboard').style.display = 'block';
-    document.getElementById('mob-nav').style.display = 'block';
-    const d = document.getElementById('api-dot');
-    d.textContent = '● Connected'; d.style.color = '#4ade80';
+async function login(){
+  const k=document.getElementById('admin-key').value.trim();
+  const e=document.getElementById('login-err');
+  e.textContent='';
+  if(!k){e.textContent='Please enter your admin key';return;}
+  try{
+    const r=await fetch(`${API}/orders?limit=1`,{headers:{'x-admin-key':k},signal:AbortSignal.timeout(8000)});
+    if(r.status===401)throw new Error('Invalid admin key');
+    if(!r.ok)throw new Error('Cannot connect — check Railway is running');
+    KEY=k;
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('dashboard').style.display='block';
+    document.getElementById('mob-nav').style.display='block';
+    const d=document.getElementById('api-dot');
+    d.textContent='● Connected';d.style.color='#4ade80';
     loadOrders();
-  } catch (ex) { e.textContent = ex.message; }
+  }catch(ex){e.textContent=ex.message;}
 }
+function logout(){KEY='';document.getElementById('dashboard').style.display='none';document.getElementById('login-screen').style.display='flex';document.getElementById('admin-key').value='';document.getElementById('api-dot').textContent='● Connecting…';document.getElementById('api-dot').style.color='rgba(255,255,255,.3)';}
 
-function logout() {
-  KEY = '';
-  document.getElementById('dashboard').style.display = 'none';
-  document.getElementById('login-screen').style.display = 'flex';
-  document.getElementById('admin-key').value = '';
-  document.getElementById('mob-nav').style.display = 'none';
+/* ── MOBILE NAV ───────────────────────────────────── */
+function showPageMob(n,el){
+  document.querySelectorAll('.mni').forEach(x=>x.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.getElementById('page-'+n).classList.add('active');
+  if(n==='products')loadProducts();
+  if(n==='promos')loadPromos();
 }
 
 /* ── NAV ──────────────────────────────────────────── */
-function showPage(n, el) {
-  document.querySelectorAll('.ni').forEach(x => x.classList.remove('active'));
-  document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
+function showPage(n,el){
+  document.querySelectorAll('.ni').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
   el.classList.add('active');
-  document.getElementById('page-' + n).classList.add('active');
-  if (n === 'products') loadProducts();
-  if (n === 'promos') loadPromos();
-}
-
-function showPageMob(n, el) {
-  document.querySelectorAll('.mni').forEach(x => x.classList.remove('active'));
-  el.classList.add('active');
-  document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
-  document.getElementById('page-' + n).classList.add('active');
-  if (n === 'products') loadProducts();
-  if (n === 'promos') loadPromos();
+  document.getElementById('page-'+n).classList.add('active');
+  if(n==='products')loadProducts();
+  if(n==='promos')loadPromos();
 }
 
 /* ── TOAST ────────────────────────────────────────── */
-function toast(m, t = '') {
-  const el = document.getElementById('toast');
-  el.textContent = m; el.className = 'toast show' + (t ? ' ' + t : '');
-  clearTimeout(toastT); toastT = setTimeout(() => el.className = 'toast', 3000);
+function toast(m,t=''){
+  const el=document.getElementById('toast');
+  el.textContent=m;el.className='toast show'+(t?' '+t:'');
+  clearTimeout(toastT);toastT=setTimeout(()=>el.className='toast',3000);
 }
 
 /* ── ORDERS ───────────────────────────────────────── */
-async function loadOrders() {
-  try {
-    const qs = sf ? `status=${sf}&limit=200` : 'limit=200';
-    const r = await fetch(`${API}/orders?${qs}`, { headers: { 'x-admin-key': KEY } });
-    const j = await r.json(); if (!j.success) throw new Error(j.error);
-    allOrders = j.data; renderOrders(allOrders); calcStats(allOrders);
-  } catch (ex) {
-    document.getElementById('ob').innerHTML = `<tr><td colspan="7" class="eck" style="color:#c05020">Error: ${ex.message}</td></tr>`;
+async function loadOrders(){
+  try{
+    const qs=sf?`status=${sf}&limit=200`:'limit=200';
+    const r=await fetch(`${API}/orders?${qs}`,{headers:{'x-admin-key':KEY}});
+    const j=await r.json();if(!j.success)throw new Error(j.error);
+    allOrders=j.data;renderOrders(allOrders);calcStats(allOrders);
+  }catch(ex){
+    document.getElementById('ob').innerHTML=`<tr><td colspan="7" class="eck" style="color:#c05020">Error: ${ex.message}</td></tr>`;
   }
 }
-
-function filterOrders() {
-  const q = document.getElementById('osearch').value.toLowerCase();
-  renderOrders(allOrders.filter(o =>
-    o.order_ref.toLowerCase().includes(q) ||
-    o.customer_name.toLowerCase().includes(q) ||
-    o.customer_phone.includes(q)
-  ));
+function filterOrders(){
+  const q=document.getElementById('osearch').value.toLowerCase();
+  renderOrders(allOrders.filter(o=>o.order_ref.toLowerCase().includes(q)||o.customer_name.toLowerCase().includes(q)||o.customer_phone.includes(q)));
 }
-
-function renderOrders(list) {
-  const tb = document.getElementById('ob');
-  if (!list.length) { tb.innerHTML = `<tr><td colspan="7" class="eck">No orders found</td></tr>`; return; }
-  const statusClass = { pending: 'bp', confirmed: 'bc', shipped: 'bsh', delivered: 'bdl', cancelled: 'bca' };
-  tb.innerHTML = list.map(o => `
+function renderOrders(list){
+  const tb=document.getElementById('ob');
+  if(!list.length){tb.innerHTML=`<tr><td colspan="7" class="eck">No orders found</td></tr>`;return;}
+  const statusClass={pending:'bp',confirmed:'bc',shipped:'bsh',delivered:'bdl',cancelled:'bca'};
+  tb.innerHTML=list.map(o=>`
     <tr style="cursor:pointer" onclick="openPanel('${o.order_ref}')">
       <td><strong style="font-family:var(--serif);font-size:13px;color:var(--accent)">${o.order_ref}</strong></td>
       <td><div style="font-weight:600">${o.customer_name}</div><div style="font-size:12px;color:var(--muted)">${o.customer_phone}</div></td>
-      <td style="color:var(--muted);font-size:13px">${o.items.length} item${o.items.length !== 1 ? 's' : ''}</td>
+      <td style="color:var(--muted);font-size:13px">${o.items.length} item${o.items.length!==1?'s':''}</td>
       <td style="font-family:var(--serif);font-size:16px;font-weight:700">AED ${o.total}</td>
       <td style="font-size:12px;color:var(--muted)">${fd(o.created_at)}</td>
-      <td><span class="badge ${statusClass[o.status] || 'bp'}">${o.status}</span></td>
+      <td><span class="badge ${statusClass[o.status]||'bp'}">${o.status}</span></td>
       <td onclick="event.stopPropagation()">
         <select class="ssel" onchange="updateStatus('${o.order_ref}',this.value)">
-          ${['pending','confirmed','shipped','delivered','cancelled'].map(s => `<option${s === o.status ? ' selected' : ''}>${s}</option>`).join('')}
+          ${['pending','confirmed','shipped','delivered','cancelled'].map(s=>`<option${s===o.status?' selected':''}>${s}</option>`).join('')}
         </select>
       </td>
     </tr>
   `).join('');
 }
-
-function calcStats(list) {
-  document.getElementById('st-total').textContent = list.length;
-  document.getElementById('st-pend').textContent = list.filter(o => o.status === 'pending').length;
-  const rev = list.filter(o => o.status === 'delivered').reduce((s, o) => s + o.total, 0);
-  document.getElementById('st-rev').textContent = rev ? 'AED ' + Math.round(rev).toLocaleString() : 'AED 0';
-  const avg = list.length ? Math.round(list.reduce((s, o) => s + o.total, 0) / list.length) : 0;
-  document.getElementById('st-avg').textContent = avg ? 'AED ' + avg : 'AED 0';
+function calcStats(list){
+  document.getElementById('st-total').textContent=list.length;
+  document.getElementById('st-pend').textContent=list.filter(o=>o.status==='pending').length;
+  const rev=list.filter(o=>o.status==='delivered').reduce((s,o)=>s+o.total,0);
+  document.getElementById('st-rev').textContent=rev?'AED '+Math.round(rev).toLocaleString():'AED 0';
+  const avg=list.length?Math.round(list.reduce((s,o)=>s+o.total,0)/list.length):0;
+  document.getElementById('st-avg').textContent=avg?'AED '+avg:'AED 0';
 }
-
-function setSF(el, s) {
-  document.querySelectorAll('.fb .pill').forEach(p => p.classList.remove('on'));
-  el.classList.add('on'); sf = s; loadOrders();
+function setSF(el,s){document.querySelectorAll('.fb .pill').forEach(p=>p.classList.remove('on'));el.classList.add('on');sf=s;loadOrders();}
+async function updateStatus(ref,status){
+  try{
+    const r=await fetch(`${API}/orders/${ref}/status`,{method:'PATCH',headers:{'Content-Type':'application/json','x-admin-key':KEY},body:JSON.stringify({status})});
+    const j=await r.json();if(!j.success)throw new Error(j.error);
+    loadOrders();toast('Status updated to '+status,'tok');
+    if(document.getElementById('pov').classList.contains('open'))openPanel(ref);
+  }catch(ex){toast('Error: '+ex.message,'terr');}
 }
+function fd(iso){return new Date(iso).toLocaleDateString('en-AE',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});}
 
-async function updateStatus(ref, status) {
-  try {
-    const r = await fetch(`${API}/orders/${ref}/status`, { method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-admin-key': KEY }, body: JSON.stringify({ status }) });
-    const j = await r.json(); if (!j.success) throw new Error(j.error);
-    loadOrders(); toast('Status updated to ' + status, 'tok');
-    if (document.getElementById('pov').classList.contains('open')) openPanel(ref);
-  } catch (ex) { toast('Error: ' + ex.message, 'terr'); }
-}
-
-function fd(iso) {
-  return new Date(iso).toLocaleDateString('en-AE', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
-}
-
-/* ── ORDER PANEL ──────────────────────────────────── */
-function openPanel(ref) {
-  const o = allOrders.find(x => x.order_ref === ref); if (!o) return;
-  const items = o.items.map(i => `
-    <div class="ir">
-      <div><div class="in">${i.name}</div><div class="id2">${i.colour || '—'} · Qty ${i.qty}</div></div>
-      <div class="ip">AED ${i.line_total || i.unit_price * i.qty}</div>
-    </div>`).join('');
-  const waN = o.customer_phone.replace(/\D/g, '');
-  const waM = encodeURIComponent(`Hi ${o.customer_name}! 🛍️\nYour Sara Bags order *${o.order_ref}* status: *${o.status}*\nThank you for shopping with us!`);
-  document.getElementById('pc').innerHTML = `
-    <div class="pref">${o.order_ref}</div>
-    <div class="pdate">${fd(o.created_at)}</div>
-    <div style="margin-bottom:20px">
-      <div class="sec-hd">Customer</div>
+/* PANEL */
+function openPanel(ref){
+  const o=allOrders.find(x=>x.order_ref===ref);if(!o)return;
+  const items=o.items.map(i=>`
+    <div class="ir"><div><div class="in">${i.name}</div><div class="id2">${i.colour||'—'} · Qty ${i.qty}</div></div>
+    <div class="ip">AED ${i.line_total||i.unit_price*i.qty}</div></div>`).join('');
+  const waN=o.customer_phone.replace(/\D/g,'');
+  const waM=encodeURIComponent(`Hi ${o.customer_name}! 🛍️\nYour Sara Bags order *${o.order_ref}* status: *${o.status}*\nThank you for shopping with us!`);
+  document.getElementById('pc').innerHTML=`
+    <div class="pref">${o.order_ref}</div><div class="pdate">${fd(o.created_at)}</div>
+    <div style="margin-bottom:20px"><div class="sec-hd">Customer</div>
       <div class="dr"><span class="dl">Name</span><span class="dv">${o.customer_name}</span></div>
       <div class="dr"><span class="dl">Phone</span><span class="dv">${o.customer_phone}</span></div>
-      ${o.customer_email ? `<div class="dr"><span class="dl">Email</span><span class="dv">${o.customer_email}</span></div>` : ''}
-      ${o.notes ? `<div class="dr"><span class="dl">Notes</span><span class="dv">${o.notes}</span></div>` : ''}
+      ${o.customer_email?`<div class="dr"><span class="dl">Email</span><span class="dv">${o.customer_email}</span></div>`:''}
+      ${o.notes?`<div class="dr"><span class="dl">Notes</span><span class="dv">${o.notes}</span></div>`:''}
     </div>
     <div style="margin-bottom:20px"><div class="sec-hd">Items</div>${items}</div>
-    <div style="margin-bottom:20px">
-      <div class="sec-hd">Payment</div>
+    <div style="margin-bottom:20px"><div class="sec-hd">Payment</div>
       <div class="dr"><span class="dl">Subtotal</span><span class="dv">AED ${o.subtotal}</span></div>
-      <div class="dr"><span class="dl">Delivery</span><span class="dv">${o.delivery_option === 'try_on' ? 'Try On (+AED 15)' : 'Standard (Free)'}</span></div>
-      ${o.discount > 0 ? `<div class="dr"><span class="dl">Discount (${o.promo_code || ''})</span><span class="dv" style="color:var(--green)">−AED ${o.discount}</span></div>` : ''}
+      <div class="dr"><span class="dl">Delivery</span><span class="dv">${o.delivery_option==='try_on'?'Try On (+AED 15)':'Standard (Free)'}</span></div>
+      ${o.discount>0?`<div class="dr"><span class="dl">Discount (${o.promo_code||''})</span><span class="dv" style="color:var(--green)">−AED ${o.discount}</span></div>`:''}
       <div class="dr" style="border-top:1px solid var(--border);padding-top:10px;margin-top:4px">
         <span class="dl" style="font-weight:700;font-size:14px">Total</span>
         <span class="dv" style="font-family:var(--serif);font-size:20px">AED ${o.total}</span>
       </div>
     </div>
-    <div>
-      <div class="sec-hd">Update Status</div>
+    <div><div class="sec-hd">Update Status</div>
       <select class="ssel" style="width:100%;padding:12px 14px;border-radius:var(--r);font-size:14px" onchange="updateStatus('${o.order_ref}',this.value)">
-        ${['pending','confirmed','shipped','delivered','cancelled'].map(s => `<option${s === o.status ? ' selected' : ''}>${s}</option>`).join('')}
+        ${['pending','confirmed','shipped','delivered','cancelled'].map(s=>`<option${s===o.status?' selected':''}>${s}</option>`).join('')}
       </select>
     </div>
     <a href="https://wa.me/${waN}?text=${waM}" target="_blank" class="wa-btn">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.104.548 4.078 1.505 5.796L.057 23.994l6.345-1.62A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-4.988-1.361l-.356-.212-3.694.944.984-3.593-.232-.37A9.774 9.774 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.195-.57-.027-.223-.223-.835-.857-1.02-1.035-.186-.179-.307-.199-.504.004-.197.202-.76.944-.929 1.136-.169.192-.339.216-.536.019-.197-.198-1.044-1.224-1.62-1.898-.6-.702-1.007-1.573-1.124-1.77-.117-.198-.02-.304.088-.403.086-.083.192-.216.288-.325.095-.109.127-.192.19-.32.062-.127.031-.239-.016-.335-.047-.095-.448-1.078-.615-1.475-.162-.388-.326-.335-.449-.34-.115-.007-.247-.007-.379-.007-.131 0-.344.05-.524.237-.18.187-.691.676-.691 1.646 0 .97.71 1.91.808 2.04.098.129 1.39 2.122 3.369 2.976 2.023.87 2.822.805 3.334.76.511-.045 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.345m-5.421-7.403h-.004c-3.582 0-6.917-2.916-6.917-6.498 0-3.582 3.335-6.497 6.917-6.497 3.581 0 6.916 2.916 6.916 6.497 0 3.582-3.335 6.498-6.916 6.498m5.221-12.49C11.463 2.969 6.823 2 3.6 5.146 1.624 7.062.623 9.657.623 12.414c0 2.757 1.001 5.352 2.977 7.268l-1.193 3.671c-.496 1.53.823 2.771 2.1 2.231l3.384-1.691c1.944.529 3.99.529 5.934 0l3.384 1.691c1.278.54 2.596-.702 2.1-2.231l-1.192-3.671c1.976-1.916 2.977-4.511 2.977-7.268 0-2.757-1.001-5.352-2.977-7.268" fill="currentColor"/></svg>
       Send WhatsApp Update
     </a>`;
   document.getElementById('pov').classList.add('open');
 }
-
-function closePO(e) { if (e.target === document.getElementById('pov')) closeP(); }
-function closeP() { document.getElementById('pov').classList.remove('open'); }
+function closePO(e){if(e.target===document.getElementById('pov'))closeP();}
+function closeP(){document.getElementById('pov').classList.remove('open');}
 
 /* ── PRODUCTS ─────────────────────────────────────── */
-async function loadProducts() {
-  try {
-    const r = await fetch(`${API}/products/all`, { headers: { 'x-admin-key': KEY } });
-    const j = await r.json(); if (!j.success) throw new Error(j.error);
+async function loadProducts(){
+  try{
+    const r=await fetch(`${API}/products/all`,{headers:{'x-admin-key':KEY}});
+    const j=await r.json();if(!j.success)throw new Error(j.error);
     renderProducts(j.data);
-  } catch (ex) {
-    document.getElementById('pg').innerHTML = `<div style="color:#c05020;padding:20px">Error: ${ex.message}</div>`;
-  }
+  }catch(ex){document.getElementById('pg').innerHTML=`<div style="color:#c05020;padding:20px">Error: ${ex.message}</div>`;}
 }
-
-function renderProducts(list) {
-  const g = document.getElementById('pg');
-  if (!list.length) { g.innerHTML = `<div style="padding:60px;text-align:center;color:var(--muted);font-style:italic">No products yet. Add your first bag!</div>`; return; }
-  g.innerHTML = list.map(p => {
-    const active = p.active !== 0 && p.active !== false;
-    const cols = Array.isArray(p.colours) ? p.colours : [];
-    const thumb = p.image_url
-      ? `<div class="pthumb"><img src="${p.image_url}" alt="" onerror="this.parentElement.innerHTML='${(p.bg_text || p.name).replace(/'/g, "\\'")}'" /></div>`
-      : `<div class="pthumb">${p.bg_text || p.name}</div>`;
-    const pj = JSON.stringify(p).replace(/\\/g, '\\\\').replace(/"/g, '&quot;');
-    return `<div class="pcard${active ? '' : ' inactive'}">
+function renderProducts(list){
+  const g=document.getElementById('pg');
+  if(!list.length){g.innerHTML=`<div style="padding:60px;text-align:center;color:var(--muted);font-style:italic">No products yet. Add your first bag!</div>`;return;}
+  g.innerHTML=list.map(p=>{
+    const active=p.active!==0&&p.active!==false;
+    const cols=Array.isArray(p.colours)?p.colours:[];
+    const thumb=p.image_url
+      ?`<div class="pthumb"><img src="${p.image_url}" alt="" onerror="this.parentElement.textContent='${(p.bg_text||p.name).replace(/'/g,"\\'")}'" /></div>`
+      :`<div class="pthumb">${p.bg_text||p.name}</div>`;
+    const pj=JSON.stringify(p).replace(/\\/g,'\\\\').replace(/"/g,'&quot;');
+    return `<div class="pcard${active?'':' inactive'}">
       ${thumb}
       <div class="pbody">
-        <div class="pnr"><div class="pn">${p.name}</div>${!active ? '<span class="badge bhid">Hidden</span>' : ''}</div>
-        <div class="psub">${p.subtitle || ''}</div>
+        <div class="pnr"><div class="pn">${p.name}</div>${!active?'<span class="badge bhid">Hidden</span>':''}</div>
+        <div class="psub">${p.subtitle||''}</div>
         <div class="ppr">AED ${p.price}</div>
         <div class="ptags">
-          ${p.category ? `<span class="tag">${p.category}</span>` : ''}
-          ${cols.map(c => `<span class="tag">${c}</span>`).join('')}
+          ${p.category?`<span class="tag">${p.category}</span>`:''}
+          ${cols.map(c=>`<span class="tag">${c}</span>`).join('')}
         </div>
         <div class="pac">
           <button class="btn bg bsm" onclick='openPM(${pj})'>✏️ Edit</button>
-          <button class="btn bd bsm" onclick="delProd(${p.id},'${p.name.replace(/'/g, "\\'")}')">Delete</button>
+          <button class="btn bd bsm" onclick="delProd(${p.id},'${p.name.replace(/'/g,"\\'")}')">Delete</button>
         </div>
       </div>
     </div>`;
   }).join('');
 }
 
-/* ── PRODUCT MODAL ────────────────────────────────── */
-function openPM(p) {
-  editPID = p ? p.id : null;
-  pmC = p && Array.isArray(p.colours) ? [...p.colours] : [];
-  document.getElementById('pm-t').textContent = p ? 'Edit Product' : 'Add New Bag';
-  document.getElementById('pm-id').value = p ? p.id : '';
-  document.getElementById('pm-name').value = p ? p.name : '';
-  document.getElementById('pm-sub').value = p ? (p.subtitle || '') : '';
-  document.getElementById('pm-desc').value = p ? (p.description || '') : '';
-  document.getElementById('pm-price').value = p ? p.price : '';
-  document.getElementById('pm-cat').value = p ? (p.category || '') : '';
-  document.getElementById('pm-bgt').value = p ? (p.bg_text || '') : '';
-  document.getElementById('pm-ik').value = p ? (p.image_key || '') : '';
-  document.getElementById('pm-act').value = (p && (p.active === 0 || p.active === false)) ? '0' : '1';
-  document.getElementById('pm-err').style.display = 'none';
-  renderChips();
-  const imgUrls = p ? [p.image_url||'', p.image_url_2||'', p.image_url_3||''] : [];
-  resetImgUI(imgUrls);
+/* PRODUCT MODAL */
+function openPM(p){
+  editPID=p?p.id:null;pmC=p&&Array.isArray(p.colours)?[...p.colours]:[];
+  document.getElementById('pm-t').textContent=p?'Edit Product':'Add New Bag';
+  document.getElementById('pm-id').value=p?p.id:'';
+  document.getElementById('pm-name').value=p?p.name:'';
+  document.getElementById('pm-sub').value=p?(p.subtitle||''):'';
+  document.getElementById('pm-desc').value=p?(p.description||''):'';
+  document.getElementById('pm-price').value=p?p.price:'';
+  document.getElementById('pm-cat').value=p?(p.category||''):'';
+  document.getElementById('pm-bgt').value=p?(p.bg_text||''):'';
+  document.getElementById('pm-ik').value=p?(p.image_key||''):'';
+  document.getElementById('pm-iu').value=p?(p.image_url||''):'';
+  document.getElementById('pm-act').value=(p&&(p.active===0||p.active===false))?'0':'1';
+  document.getElementById('pm-err').style.display='none';
+  renderChips();prevI(p?(p.image_url||''):'');
   document.getElementById('pm-modal').classList.add('open');
 }
-
-function closePM() { document.getElementById('pm-modal').classList.remove('open'); }
-function closePMO(e) { if (e.target === document.getElementById('pm-modal')) closePM(); }
-
-function addChip() {
-  const v = document.getElementById('pm-cin').value.trim();
-  if (v && !pmC.includes(v)) { pmC.push(v); renderChips(); }
-  document.getElementById('pm-cin').value = '';
+function closePM(){document.getElementById('pm-modal').classList.remove('open');}
+function closePMO(e){if(e.target===document.getElementById('pm-modal'))closePM();}
+function addChip(){const v=document.getElementById('pm-cin').value.trim();if(v&&!pmC.includes(v)){pmC.push(v);renderChips();}document.getElementById('pm-cin').value='';}
+function removeChip(c){pmC=pmC.filter(x=>x!==c);renderChips();}
+function renderChips(){document.getElementById('pm-chips').innerHTML=pmC.map(c=>`<div class="chip">${c}<button class="chipx" onclick="removeChip('${c.replace(/'/g,"\\'")}')">×</button></div>`).join('');}
+function prevI(u){const i=document.getElementById('pm-prev');if(u&&u.startsWith('http')){i.src=u;i.className='iprev show';}else i.className='iprev';}
+async function saveProd(){
+  const name=document.getElementById('pm-name').value.trim();
+  const price=parseFloat(document.getElementById('pm-price').value);
+  const e=document.getElementById('pm-err');
+  if(!name||isNaN(price)||price<0){e.textContent='Product name and a valid price are required';e.style.display='block';return;}
+  const body={name,subtitle:document.getElementById('pm-sub').value.trim(),description:document.getElementById('pm-desc').value.trim(),price,category:document.getElementById('pm-cat').value.trim(),bg_text:document.getElementById('pm-bgt').value.trim(),image_key:document.getElementById('pm-ik').value.trim(),image_url:document.getElementById('pm-iu').value.trim(),colours:pmC,active:parseInt(document.getElementById('pm-act').value)};
+  try{
+    const r=await fetch(editPID?`${API}/products/${editPID}`:`${API}/products`,{method:editPID?'PUT':'POST',headers:{'Content-Type':'application/json','x-admin-key':KEY},body:JSON.stringify(body)});
+    const j=await r.json();if(!j.success)throw new Error(j.error);
+    closePM();loadProducts();toast(editPID?'Product updated ✓':'Product added ✓','tok');
+  }catch(ex){e.textContent=ex.message;e.style.display='block';}
 }
-function removeChip(c) { pmC = pmC.filter(x => x !== c); renderChips(); }
-function renderChips() {
-  document.getElementById('pm-chips').innerHTML = pmC.map(c =>
-    `<div class="chip">${c}<button class="chipx" onclick="removeChip('${c.replace(/'/g, "\\'")}')">×</button></div>`
-  ).join('');
-}
-
-/* ── IMAGE UPLOAD — 3 slots ────────────────────────── */
-function triggerSlot(e, i) {
-  if (e.target.classList.contains('slot-clr') || e.target.id === 'clr-'+i) return;
-  document.getElementById('pm-file-'+i).click();
-}
-
-function handleDropSlot(e, i) {
-  e.preventDefault();
-  document.getElementById('slot-'+i).classList.remove('drag');
-  const f = e.dataTransfer.files[0];
-  if (f && f.type.startsWith('image/')) handleFileSlot(f, i);
-}
-
-function handleFileSlot(f, i) {
-  if (!f) return;
-  const reader = new FileReader();
-  reader.onload = function(ev) { setSlotPreview(ev.target.result, i); };
-  reader.readAsDataURL(f);
-}
-
-function setSlotPreview(src, i) {
-  const key = i === 0 ? 'pm-img-val' : 'pm-img-val-'+i;
-  document.getElementById(key).value = src;
-  const img = document.getElementById('prev-'+i);
-  img.src = src; img.style.display = 'block';
-  document.getElementById('slot-ph-'+i).style.display = 'none';
-  document.getElementById('clr-'+i).style.display = 'flex';
-}
-
-function clearSlot(e, i) {
-  e.stopPropagation();
-  const key = i === 0 ? 'pm-img-val' : 'pm-img-val-'+i;
-  document.getElementById(key).value = '';
-  document.getElementById('pm-file-'+i).value = '';
-  const img = document.getElementById('prev-'+i);
-  img.src = ''; img.style.display = 'none';
-  document.getElementById('slot-ph-'+i).style.display = 'flex';
-  document.getElementById('clr-'+i).style.display = 'none';
-}
-
-function resetImgUI(urls) {
-  // urls can be a single string (legacy) or array of up to 3
-  if (!Array.isArray(urls)) urls = urls ? [urls] : [];
-  for (let i = 0; i < 3; i++) {
-    document.getElementById('pm-file-'+i).value = '';
-    if (urls[i]) {
-      setSlotPreview(urls[i], i);
-    } else {
-      const key = i === 0 ? 'pm-img-val' : 'pm-img-val-'+i;
-      document.getElementById(key).value = '';
-      const img = document.getElementById('prev-'+i);
-      img.src = ''; img.style.display = 'none';
-      document.getElementById('slot-ph-'+i).style.display = 'flex';
-      document.getElementById('clr-'+i).style.display = 'none';
-    }
-  }
-}
-
-async function saveProd() {
-  const name = document.getElementById('pm-name').value.trim();
-  const price = parseFloat(document.getElementById('pm-price').value);
-  const e = document.getElementById('pm-err');
-  if (!name || isNaN(price) || price < 0) {
-    e.textContent = 'Product name and a valid price are required';
-    e.style.display = 'block'; return;
-  }
-  const body = {
-    name,
-    subtitle: document.getElementById('pm-sub').value.trim(),
-    description: document.getElementById('pm-desc').value.trim(),
-    price,
-    category: document.getElementById('pm-cat').value.trim(),
-    bg_text: document.getElementById('pm-bgt').value.trim(),
-    image_key: document.getElementById('pm-ik').value.trim(),
-    image_url: document.getElementById('pm-img-val').value.trim(),
-    image_url_2: document.getElementById('pm-img-val-1').value.trim() || null,
-    image_url_3: document.getElementById('pm-img-val-2').value.trim() || null,
-    colours: pmC,
-    active: parseInt(document.getElementById('pm-act').value)
-  };
-  try {
-    const r = await fetch(
-      editPID ? `${API}/products/${editPID}` : `${API}/products`,
-      { method: editPID ? 'PUT' : 'POST', headers: { 'Content-Type': 'application/json', 'x-admin-key': KEY }, body: JSON.stringify(body) }
-    );
-    const j = await r.json(); if (!j.success) throw new Error(j.error);
-    closePM(); loadProducts(); toast(editPID ? 'Product updated ✓' : 'Product added ✓', 'tok');
-  } catch (ex) { e.textContent = ex.message; e.style.display = 'block'; }
-}
-
-async function delProd(id, name) {
-  if (!confirm(`Delete "${name}"?\nThis cannot be undone.`)) return;
-  try {
-    const r = await fetch(`${API}/products/${id}`, { method: 'DELETE', headers: { 'x-admin-key': KEY } });
-    const j = await r.json(); if (!j.success) throw new Error(j.error);
-    loadProducts(); toast('Product deleted', 'terr');
-  } catch (ex) { toast('Error: ' + ex.message, 'terr'); }
+async function delProd(id,name){
+  if(!confirm(`Delete "${name}"?\nThis cannot be undone.`))return;
+  try{
+    const r=await fetch(`${API}/products/${id}`,{method:'DELETE',headers:{'x-admin-key':KEY}});
+    const j=await r.json();if(!j.success)throw new Error(j.error);
+    loadProducts();toast('Product deleted','terr');
+  }catch(ex){toast('Error: '+ex.message,'terr');}
 }
 
 /* ── PROMOS ───────────────────────────────────────── */
-async function loadPromos() {
-  try {
-    const r = await fetch(`${API}/promos`, { headers: { 'x-admin-key': KEY } });
-    const j = await r.json(); if (!j.success) throw new Error(j.error);
+async function loadPromos(){
+  try{
+    const r=await fetch(`${API}/promos`,{headers:{'x-admin-key':KEY}});
+    const j=await r.json();if(!j.success)throw new Error(j.error);
     renderPromos(j.data);
-  } catch (ex) {
-    document.getElementById('pmb').innerHTML = `<tr><td colspan="7" class="eck" style="color:#c05020">Error: ${ex.message}</td></tr>`;
-  }
+  }catch(ex){document.getElementById('pmb').innerHTML=`<tr><td colspan="7" class="eck" style="color:#c05020">Error: ${ex.message}</td></tr>`;}
 }
-
-function renderPromos(list) {
-  const tb = document.getElementById('pmb');
-  if (!list.length) { tb.innerHTML = `<tr><td colspan="7" class="eck">No promo codes yet</td></tr>`; return; }
-  tb.innerHTML = list.map(p => {
-    const pj = JSON.stringify(p).replace(/\\/g, '\\\\').replace(/"/g, '&quot;');
+function renderPromos(list){
+  const tb=document.getElementById('pmb');
+  if(!list.length){tb.innerHTML=`<tr><td colspan="7" class="eck">No promo codes yet</td></tr>`;return;}
+  tb.innerHTML=list.map(p=>{
+    const pj=JSON.stringify(p).replace(/\\/g,'\\\\').replace(/"/g,'&quot;');
     return `<tr>
       <td><span class="mono">${p.code}</span></td>
-      <td style="font-weight:700;font-family:var(--serif);font-size:16px">${p.type === 'percent' ? p.discount + '%' : 'AED ' + p.discount}</td>
-      <td style="color:var(--muted);font-size:13px">${p.type === 'percent' ? 'Percentage' : 'Fixed'}</td>
-      <td>${p.uses || 0}</td>
-      <td>${p.max_uses || '<span style="color:var(--muted)">Unlimited</span>'}</td>
-      <td><button class="tgl ${p.active ? 'ton' : 'toff'}" onclick="togglePromo(${p.id},${p.active ? 0 : 1})">${p.active ? 'Active' : 'Inactive'}</button></td>
+      <td style="font-weight:700;font-family:var(--serif);font-size:16px">${p.type==='percent'?p.discount+'%':'AED '+p.discount}</td>
+      <td style="color:var(--muted);font-size:13px">${p.type==='percent'?'Percentage':'Fixed'}</td>
+      <td>${p.uses||0}</td>
+      <td>${p.max_uses||'<span style="color:var(--muted)">Unlimited</span>'}</td>
+      <td><button class="tgl ${p.active?'ton':'toff'}" onclick="togglePromo(${p.id},${p.active?0:1})">${p.active?'Active':'Inactive'}</button></td>
       <td style="display:flex;gap:8px">
         <button class="btn bg bsm" onclick='openPRM(${pj})'>Edit</button>
         <button class="btn bd bsm" onclick="delPromo(${p.id},'${p.code}')">Delete</button>
@@ -853,67 +681,56 @@ function renderPromos(list) {
   }).join('');
 }
 
-function openPRM(p) {
-  editPRID = p ? p.id : null;
-  document.getElementById('prm-t').textContent = p ? 'Edit Promo Code' : 'New Promo Code';
-  document.getElementById('prm-id').value = p ? p.id : '';
-  document.getElementById('prm-code').value = p ? p.code : '';
-  document.getElementById('prm-code').disabled = !!p;
-  document.getElementById('prm-type').value = p ? (p.type || 'percent') : 'percent';
-  document.getElementById('prm-amt').value = p ? p.discount : '';
-  document.getElementById('prm-mu').value = p ? (p.max_uses || '') : '';
-  document.getElementById('prm-act').value = (p && !p.active) ? '0' : '1';
-  document.getElementById('prm-err').style.display = 'none';
-  updHint(); document.getElementById('prm-modal').classList.add('open');
+/* PROMO MODAL */
+function openPRM(p){
+  editPRID=p?p.id:null;
+  document.getElementById('prm-t').textContent=p?'Edit Promo Code':'New Promo Code';
+  document.getElementById('prm-id').value=p?p.id:'';
+  document.getElementById('prm-code').value=p?p.code:'';
+  document.getElementById('prm-code').disabled=!!p;
+  document.getElementById('prm-type').value=p?(p.type||'percent'):'percent';
+  document.getElementById('prm-amt').value=p?p.discount:'';
+  document.getElementById('prm-mu').value=p?(p.max_uses||''):'';
+  document.getElementById('prm-act').value=(p&&!p.active)?'0':'1';
+  document.getElementById('prm-err').style.display='none';
+  updHint();document.getElementById('prm-modal').classList.add('open');
+}
+function closePRM(){document.getElementById('prm-modal').classList.remove('open');}
+function closePRMO(e){if(e.target===document.getElementById('prm-modal'))closePRM();}
+function updHint(){const t=document.getElementById('prm-type').value;document.getElementById('prm-hint').textContent=t==='percent'?'e.g. 10 = 10% off every order':'e.g. 25 = AED 25 off every order';}
+async function savePromo(){
+  const code=document.getElementById('prm-code').value.trim().toUpperCase();
+  const amt=parseFloat(document.getElementById('prm-amt').value);
+  const type=document.getElementById('prm-type').value;
+  const mu=document.getElementById('prm-mu').value;
+  const active=parseInt(document.getElementById('prm-act').value);
+  const e=document.getElementById('prm-err');
+  if(!code||isNaN(amt)||amt<0){e.textContent='Code and a valid discount amount are required';e.style.display='block';return;}
+  if(type==='percent'&&(amt<=0||amt>100)){e.textContent='Percentage must be between 1 and 100';e.style.display='block';return;}
+  const body={code,discount:amt,type,active,max_uses:mu?parseInt(mu):null};
+  try{
+    const r=await fetch(editPRID?`${API}/promos/${editPRID}`:`${API}/promos`,{method:editPRID?'PUT':'POST',headers:{'Content-Type':'application/json','x-admin-key':KEY},body:JSON.stringify(body)});
+    const j=await r.json();if(!j.success)throw new Error(j.error);
+    closePRM();loadPromos();toast(editPRID?'Promo updated ✓':'Promo code created ✓','tok');
+  }catch(ex){e.textContent=ex.message;e.style.display='block';}
+}
+async function togglePromo(id,na){
+  try{
+    const r=await fetch(`${API}/promos/${id}`,{method:'PUT',headers:{'Content-Type':'application/json','x-admin-key':KEY},body:JSON.stringify({active:na})});
+    const j=await r.json();if(!j.success)throw new Error(j.error);
+    loadPromos();toast(na?'Promo activated':'Promo deactivated','tok');
+  }catch(ex){toast('Error: '+ex.message,'terr');}
+}
+async function delPromo(id,code){
+  if(!confirm(`Delete promo code "${code}"?\nThis cannot be undone.`))return;
+  try{
+    const r=await fetch(`${API}/promos/${id}`,{method:'DELETE',headers:{'x-admin-key':KEY}});
+    const j=await r.json();if(!j.success)throw new Error(j.error);
+    loadPromos();toast(`Promo "${code}" deleted`,'terr');
+  }catch(ex){toast('Error: '+ex.message,'terr');}
 }
 
-function closePRM() { document.getElementById('prm-modal').classList.remove('open'); }
-function closePRMO(e) { if (e.target === document.getElementById('prm-modal')) closePRM(); }
-function updHint() {
-  const t = document.getElementById('prm-type').value;
-  document.getElementById('prm-hint').textContent = t === 'percent' ? 'e.g. 10 = 10% off every order' : 'e.g. 25 = AED 25 off every order';
-}
-
-async function savePromo() {
-  const code = document.getElementById('prm-code').value.trim().toUpperCase();
-  const amt = parseFloat(document.getElementById('prm-amt').value);
-  const type = document.getElementById('prm-type').value;
-  const mu = document.getElementById('prm-mu').value;
-  const active = parseInt(document.getElementById('prm-act').value);
-  const e = document.getElementById('prm-err');
-  if (!code || isNaN(amt) || amt < 0) { e.textContent = 'Code and a valid discount amount are required'; e.style.display = 'block'; return; }
-  if (type === 'percent' && (amt <= 0 || amt > 100)) { e.textContent = 'Percentage must be between 1 and 100'; e.style.display = 'block'; return; }
-  const body = { code, discount: amt, type, active, max_uses: mu ? parseInt(mu) : null };
-  try {
-    const r = await fetch(
-      editPRID ? `${API}/promos/${editPRID}` : `${API}/promos`,
-      { method: editPRID ? 'PUT' : 'POST', headers: { 'Content-Type': 'application/json', 'x-admin-key': KEY }, body: JSON.stringify(body) }
-    );
-    const j = await r.json(); if (!j.success) throw new Error(j.error);
-    closePRM(); loadPromos(); toast(editPRID ? 'Promo updated ✓' : 'Promo code created ✓', 'tok');
-  } catch (ex) { e.textContent = ex.message; e.style.display = 'block'; }
-}
-
-async function togglePromo(id, na) {
-  try {
-    const r = await fetch(`${API}/promos/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json', 'x-admin-key': KEY }, body: JSON.stringify({ active: na }) });
-    const j = await r.json(); if (!j.success) throw new Error(j.error);
-    loadPromos(); toast(na ? 'Promo activated' : 'Promo deactivated', 'tok');
-  } catch (ex) { toast('Error: ' + ex.message, 'terr'); }
-}
-
-async function delPromo(id, code) {
-  if (!confirm(`Delete promo code "${code}"?\nThis cannot be undone.`)) return;
-  try {
-    const r = await fetch(`${API}/promos/${id}`, { method: 'DELETE', headers: { 'x-admin-key': KEY } });
-    const j = await r.json(); if (!j.success) throw new Error(j.error);
-    loadPromos(); toast(`Promo "${code}" deleted`, 'terr');
-  } catch (ex) { toast('Error: ' + ex.message, 'terr'); }
-}
-
-setInterval(() => {
-  if (KEY && document.getElementById('page-orders').classList.contains('active')) loadOrders();
-}, 60000);
+setInterval(()=>{if(KEY&&document.getElementById('page-orders').classList.contains('active'))loadOrders();},60000);
 </script>
 </body>
 </html>
