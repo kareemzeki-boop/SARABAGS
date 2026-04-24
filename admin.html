@@ -177,8 +177,19 @@ textarea.fi{resize:vertical;min-height:78px}
 .si:focus{border-color:var(--black)}
 .sic{position:absolute;left:11px;font-size:14px;color:var(--muted);pointer-events:none}
 
+/* MOBILE BOTTOM NAV */
+.mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--sidebar);z-index:90;padding:8px 0 env(safe-area-inset-bottom,8px);border-top:1px solid rgba(255,255,255,.08)}
+.mob-nav-inner{display:flex;justify-content:space-around;align-items:center}
+.mni{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 20px;border:none;background:none;color:rgba(255,255,255,.45);cursor:pointer;font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border-radius:12px;transition:color .18s}
+.mni .mni-icon{font-size:20px;line-height:1}
+.mni.active{color:#fff}
+.mni.active .mni-icon{transform:scale(1.1)}
+
 @media(max-width:900px){
-  .sidebar{display:none}.sr{grid-template-columns:1fr 1fr}
+  .sidebar{display:none}
+  .mob-nav{display:block}
+  .main{padding-bottom:72px}
+  .sr{grid-template-columns:1fr 1fr}
   .page{padding:20px}.pg{grid-template-columns:1fr}
   .frow{grid-template-columns:1fr}.panel{width:100%}
 }
@@ -398,6 +409,21 @@ textarea.fi{resize:vertical;min-height:78px}
 
 <div class="toast" id="toast"></div>
 
+<!-- MOBILE BOTTOM NAV -->
+<nav class="mob-nav" id="mob-nav" style="display:none">
+  <div class="mob-nav-inner">
+    <button class="mni active" id="mni-orders" onclick="showPageMob('orders',this)">
+      <span class="mni-icon">📦</span>Orders
+    </button>
+    <button class="mni" id="mni-products" onclick="showPageMob('products',this)">
+      <span class="mni-icon">👜</span>Products
+    </button>
+    <button class="mni" id="mni-promos" onclick="showPageMob('promos',this)">
+      <span class="mni-icon">🎟️</span>Promos
+    </button>
+  </div>
+</nav>
+
 <script>
 const API='https://sarabags-production.up.railway.app/api';
 let KEY='',allOrders=[],sf='',pmC=[],editPID=null,editPRID=null,toastT;
@@ -415,12 +441,23 @@ async function login(){
     KEY=k;
     document.getElementById('login-screen').style.display='none';
     document.getElementById('dashboard').style.display='block';
+    document.getElementById('mob-nav').style.display='block';
     const d=document.getElementById('api-dot');
     d.textContent='● Connected';d.style.color='#4ade80';
     loadOrders();
   }catch(ex){e.textContent=ex.message;}
 }
-function logout(){KEY='';document.getElementById('dashboard').style.display='none';document.getElementById('login-screen').style.display='flex';document.getElementById('admin-key').value='';}
+function logout(){KEY='';document.getElementById('dashboard').style.display='none';document.getElementById('login-screen').style.display='flex';document.getElementById('admin-key').value='';document.getElementById('mob-nav').style.display='none';}
+
+/* ── MOBILE NAV ───────────────────────────────────── */
+function showPageMob(n,el){
+  document.querySelectorAll('.mni').forEach(x=>x.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.getElementById('page-'+n).classList.add('active');
+  if(n==='products')loadProducts();
+  if(n==='promos')loadPromos();
+}
 
 /* ── NAV ──────────────────────────────────────────── */
 function showPage(n,el){
