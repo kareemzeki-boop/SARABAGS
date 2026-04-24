@@ -905,15 +905,16 @@ function mapApiProduct(p, index) {
   // Resolve images: API stores image_key(s) or direct image URLs
   const imageKey  = p.image_key  || p.imageKey  || '';
   const imageKey2 = p.image_key2 || p.imageKey2 || '';
-  const img1 = p.image_url  || IMGS[imageKey]  || IMGS[Object.keys(IMGS)[index % Object.keys(IMGS).length]] || IMGS.orange_clasp;
-  const img2 = p.image_url2 || IMGS[imageKey2] || img1;
+  const img1 = p.image_url   || IMGS[imageKey]  || IMGS[Object.keys(IMGS)[index % Object.keys(IMGS).length]] || IMGS.orange_clasp;
+  const img2 = p.image_url_2 || p.image_url2    || IMGS[imageKey2] || img1;
+  const img3 = p.image_url_3 || img1;
   return {
     id:       p.id,
     name:     p.name,
     sub:      p.subtitle || p.sub || '',
     price:    Number(p.price) || 0,
     cat:      p.category || p.cat || 'All',
-    imgs:     [img1, img2],
+    imgs:     [img1, img2, img3],
     bgText:   p.bg_text || p.bgText || p.name.split(' ')[0].toUpperCase(),
     desc:     p.description || p.desc || '',
     colours:  Array.isArray(p.colours) ? p.colours : (p.colours ? p.colours.split(',') : ['Default']),

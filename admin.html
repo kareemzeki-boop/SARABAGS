@@ -798,8 +798,8 @@ async function saveProd() {
     bg_text: document.getElementById('pm-bgt').value.trim(),
     image_key: document.getElementById('pm-ik').value.trim(),
     image_url: document.getElementById('pm-img-val').value.trim(),
-    image_url_2: document.getElementById('pm-img-val-1').value.trim() || null,
-    image_url_3: document.getElementById('pm-img-val-2').value.trim() || null,
+    image_url_2: document.getElementById('pm-img-val-1').value.trim() || '',
+    image_url_3: document.getElementById('pm-img-val-2').value.trim() || '',
     colours: pmC,
     active: parseInt(document.getElementById('pm-act').value)
   };

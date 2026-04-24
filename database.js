@@ -46,7 +46,14 @@ const db = {
     const rows = read('products');
     const idx = rows.findIndex(p => p.id === parseInt(id));
     if (idx === -1) return null;
-    rows[idx] = { ...rows[idx], ...data };
+    // Explicitly update all image fields to allow clearing
+    rows[idx] = { 
+      ...rows[idx], 
+      ...data,
+      image_url: data.image_url !== undefined ? data.image_url : rows[idx].image_url,
+      image_url_2: data.image_url_2 !== undefined ? data.image_url_2 : rows[idx].image_url_2,
+      image_url_3: data.image_url_3 !== undefined ? data.image_url_3 : rows[idx].image_url_3
+    };
     write('products', rows);
     return rows[idx];
   },
