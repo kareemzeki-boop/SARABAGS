@@ -750,8 +750,31 @@ function handleDropSlot(e, i) {
 
 function handleFileSlot(f, i) {
   if (!f) return;
+  // Validate file size (max 2MB per image)
+  const maxSize = 2 * 1024 * 1024; // 2MB
+  if (f.size > maxSize) {
+    toast(`Image too large (${(f.size / 1024 / 1024).toFixed(1)}MB). Max 2MB per image.`, 'terr');
+    return;
+  }
+  // Compress image before preview
   const reader = new FileReader();
-  reader.onload = function(ev) { setSlotPreview(ev.target.result, i); };
+  reader.onload = function(ev) {
+    const img = new Image();
+    img.onload = function() {
+      // Resize to max 1200px width while maintaining aspect ratio
+      const canvas = document.createElement('canvas');
+      const maxWidth = 1200;
+      const scale = Math.min(1, maxWidth / img.width);
+      canvas.width = img.width * scale;
+      canvas.height = img.height * scale;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      // Convert to JPEG with 80% quality
+      const compressed = canvas.toDataURL('image/jpeg', 0.8);
+      setSlotPreview(compressed, i);
+    };
+    img.src = ev.target.result;
+  };
   reader.readAsDataURL(f);
 }
 
@@ -815,14 +838,28 @@ async function saveProd() {
     colours: pmC,
     active: parseInt(document.getElementById('pm-act').value)
   };
+  // Validate total payload size (rough estimate: base64 is ~33% larger)
+  const payloadSize = JSON.stringify(body).length;
+  if (payloadSize > 4.5 * 1024 * 1024) {
+    e.textContent = `Images are too large (${(payloadSize / 1024 / 1024).toFixed(1)}MB). Please use smaller images.`;
+    e.style.display = 'block';
+    return;
+  }
   try {
+    e.textContent = 'Saving product…'; e.style.display = 'block'; e.style.color = '#8892a2';
     const r = await fetch(
       editPID ? `${API}/products/${editPID}` : `${API}/products`,
-      { method: editPID ? 'PUT' : 'POST', headers: { 'Content-Type': 'application/json', 'x-admin-key': KEY }, body: JSON.stringify(body) }
+      { method: editPID ? 'PUT' : 'POST', headers: { 'Content-Type': 'application/json', 'x-admin-key': KEY }, body: JSON.stringify(body), signal: AbortSignal.timeout(15000) }
     );
     const j = await r.json(); if (!j.success) throw new Error(j.error);
+    e.textContent = ''; e.style.display = 'none';
     closePM(); loadProducts(); toast(editPID ? 'Product updated ✓' : 'Product added ✓', 'tok');
-  } catch (ex) { e.textContent = ex.message; e.style.display = 'block'; }
+  } catch (ex) {
+    const msg = ex.name === 'TimeoutError' || ex.name === 'AbortError'
+      ? 'Save took too long. Check your connection and try again.'
+      : ex.message;
+    e.textContent = msg; e.style.display = 'block'; e.style.color = '#c05020';
+  }
 }
 
 async function delProd(id, name) {
