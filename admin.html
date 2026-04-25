@@ -453,7 +453,6 @@ async function login() {
   const btn = document.querySelector('.lb');
   e.textContent = '';
   if (!k) { e.textContent = 'Please enter your admin key'; return; }
-  // Show waking-up state — Railway may take up to 30s on cold start
   btn.textContent = 'Connecting…'; btn.disabled = true;
   e.textContent = 'Waking up server, please wait…'; e.style.color = '#8892a2';
   try {
@@ -467,7 +466,8 @@ async function login() {
     document.getElementById('mob-nav').style.display = 'block';
     const d = document.getElementById('api-dot');
     d.textContent = '● Connected'; d.style.color = '#4ade80';
-    loadOrders();
+    // Load all core data concurrently to save time
+    Promise.all([loadOrders(), loadProducts(), loadPromos()]);
   } catch (ex) {
     const msg = ex.name === 'TimeoutError' || ex.name === 'AbortError'
       ? 'Server is taking too long to respond. Try again in a moment.'
@@ -569,12 +569,23 @@ function setSF(el, s) {
 }
 
 async function updateStatus(ref, status) {
+  // Optimistic update for immediate feedback
+  const idx = allOrders.findIndex(o => o.order_ref === ref);
+  const oldStatus = idx !== -1 ? allOrders[idx].status : null;
+  if (idx !== -1) {
+    allOrders[idx].status = status;
+    renderOrders(allOrders); calcStats(allOrders);
+    if (document.getElementById('pov').classList.contains('open')) openPanel(ref);
+  }
   try {
     const r = await fetch(`${API}/orders/${ref}/status`, { method: 'PATCH', headers: { 'Content-Type': 'application/json', 'x-admin-key': KEY }, body: JSON.stringify({ status }) });
     const j = await r.json(); if (!j.success) throw new Error(j.error);
-    loadOrders(); toast('Status updated to ' + status, 'tok');
-    if (document.getElementById('pov').classList.contains('open')) openPanel(ref);
-  } catch (ex) { toast('Error: ' + ex.message, 'terr'); }
+    toast('Status updated to ' + status, 'tok');
+  } catch (ex) { 
+    // Revert on error
+    if (idx !== -1) { allOrders[idx].status = oldStatus; renderOrders(allOrders); calcStats(allOrders); }
+    toast('Error: ' + ex.message, 'terr'); 
+  }
 }
 
 function fd(iso) {
@@ -827,15 +838,14 @@ async function savePromo() {
   } catch (ex) { e.textContent = ex.message; e.style.display = 'block'; }
 }
 
-async function togglePromo(id, na) {
+async function togglePromo(id, active) {
   try {
-    const r = await fetch(`${API}/promos/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json', 'x-admin-key': KEY }, body: JSON.stringify({ active: na }) });
+    const r = await fetch(`${API}/promos/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json', 'x-admin-key': KEY }, body: JSON.stringify({ active }) });
     const j = await r.json(); if (!j.success) throw new Error(j.error);
-    loadPromos(); toast(na ? 'Promo activated' : 'Promo deactivated', 'tok');
+    // Silent refresh or local update could go here, but promos are small
+    loadPromos(); toast(active ? 'Promo activated' : 'Promo deactivated', 'tok');
   } catch (ex) { toast('Error: ' + ex.message, 'terr'); }
-}
-
-async function delPromo(id, code) {
+}ync function delPromo(id, code) {
   if (!confirm(`Delete promo code "${code}"?\nThis cannot be undone.`)) return;
   try {
     const r = await fetch(`${API}/promos/${id}`, { method: 'DELETE', headers: { 'x-admin-key': KEY } });
