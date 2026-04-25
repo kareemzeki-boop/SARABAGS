@@ -481,20 +481,32 @@ let KEY = '', allOrders = [], sf = '', pmC = [], editPID = null, editPRID = null
 async function login() {
   const k = document.getElementById('admin-key').value.trim();
   const e = document.getElementById('login-err');
+  const btn = document.querySelector('.lb');
   e.textContent = '';
   if (!k) { e.textContent = 'Please enter your admin key'; return; }
+  // Show waking-up state — Railway may take up to 30s on cold start
+  btn.textContent = 'Connecting…'; btn.disabled = true;
+  e.textContent = 'Waking up server, please wait…'; e.style.color = '#8892a2';
   try {
-    const r = await fetch(`${API}/orders?limit=1`, { headers: { 'x-admin-key': k }, signal: AbortSignal.timeout(8000) });
+    const r = await fetch(`${API}/orders?limit=1`, { headers: { 'x-admin-key': k }, signal: AbortSignal.timeout(30000) });
     if (r.status === 401) throw new Error('Invalid admin key');
     if (!r.ok) throw new Error('Cannot connect — check Railway is running');
     KEY = k;
+    e.textContent = ''; e.style.color = '';
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('dashboard').style.display = 'block';
     document.getElementById('mob-nav').style.display = 'block';
     const d = document.getElementById('api-dot');
     d.textContent = '● Connected'; d.style.color = '#4ade80';
     loadOrders();
-  } catch (ex) { e.textContent = ex.message; }
+  } catch (ex) {
+    const msg = ex.name === 'TimeoutError' || ex.name === 'AbortError'
+      ? 'Server is taking too long to respond. Try again in a moment.'
+      : ex.message;
+    e.textContent = msg; e.style.color = '#c05020';
+  } finally {
+    btn.textContent = 'Sign In'; btn.disabled = false;
+  }
 }
 
 function logout() {
