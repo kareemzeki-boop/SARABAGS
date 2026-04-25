@@ -845,7 +845,9 @@ async function togglePromo(id, active) {
     // Silent refresh or local update could go here, but promos are small
     loadPromos(); toast(active ? 'Promo activated' : 'Promo deactivated', 'tok');
   } catch (ex) { toast('Error: ' + ex.message, 'terr'); }
-}ync function delPromo(id, code) {
+}
+
+async function delPromo(id, code) {
   if (!confirm(`Delete promo code "${code}"?\nThis cannot be undone.`)) return;
   try {
     const r = await fetch(`${API}/promos/${id}`, { method: 'DELETE', headers: { 'x-admin-key': KEY } });
