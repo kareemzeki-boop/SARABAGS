@@ -163,21 +163,7 @@ textarea.fi{resize:vertical;min-height:78px}
 .acr input{flex:1}
 .acr button{padding:8px 16px;background:var(--black);color:#fff;border:none;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
 
-/* IMAGE UPLOAD */
-.upzone{border:2px dashed var(--border);border-radius:var(--r);text-align:center;cursor:pointer;transition:all .2s;background:var(--bg);position:relative;overflow:hidden;min-height:110px;display:flex;align-items:center;justify-content:center}
-.upzone:hover,.upzone.drag{border-color:var(--black);background:#f4f5f8}
-.upzone-inner{padding:24px 20px;pointer-events:none}
-.upzone-icon{font-size:32px;margin-bottom:8px}
-.upzone-lbl{font-size:13px;font-weight:600;color:var(--black)}
-.upzone-sub{font-size:11px;color:var(--muted);margin-top:3px}
-.up-preview{width:100%;height:170px;object-fit:cover;display:none;border-radius:calc(var(--r) - 2px)}
-.upclear{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.65);color:#fff;border:none;border-radius:50%;width:28px;height:28px;font-size:16px;cursor:pointer;display:none;align-items:center;justify-content:center;z-index:3;line-height:1}
-.upalts{font-size:11px;color:var(--muted);margin-top:8px}
-.upalts a{color:var(--accent);cursor:pointer;font-weight:600;text-decoration:underline}
-.img-slot{min-height:90px;position:relative}
-.slot-ph{padding:16px 8px!important}
-.slot-badge{position:absolute;top:6px;left:7px;background:var(--black);color:#fff;border-radius:50%;width:18px;height:18px;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:2}
-.slot-img{height:90px!important}
+/* IMAGE UPLOAD — Reverted */
 
 /* TOAST */
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(12px);background:var(--black);color:#fff;padding:11px 22px;border-radius:12px;font-size:13px;font-weight:500;z-index:999;opacity:0;transition:all .28s;pointer-events:none;white-space:nowrap}
@@ -349,36 +335,19 @@ textarea.fi{resize:vertical;min-height:78px}
         </div>
       </div>
 
-      <!-- IMAGE UPLOAD — up to 3 slots -->
       <div class="fg">
-        <label class="fl">Product Images <em style="text-transform:none;font-style:normal;font-weight:400;color:var(--muted)">(up to 3 — first is main)</em></label>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:6px">
-          <div class="upzone img-slot" id="slot-0" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handleDropSlot(event,0)" onclick="triggerSlot(event,0)">
-            <div class="upzone-inner slot-ph" id="slot-ph-0"><div class="upzone-icon" style="font-size:22px">📷</div><div class="upzone-lbl" style="font-size:11px">Main photo</div></div>
-            <img class="up-preview slot-img" id="prev-0" alt=""/>
-            <button class="upclear slot-clr" id="clr-0" onclick="clearSlot(event,0)">×</button>
-            <div class="slot-badge">1</div>
-          </div>
-          <div class="upzone img-slot" id="slot-1" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handleDropSlot(event,1)" onclick="triggerSlot(event,1)">
-            <div class="upzone-inner slot-ph" id="slot-ph-1"><div class="upzone-icon" style="font-size:22px">🖼️</div><div class="upzone-lbl" style="font-size:11px">Photo 2</div></div>
-            <img class="up-preview slot-img" id="prev-1" alt=""/>
-            <button class="upclear slot-clr" id="clr-1" onclick="clearSlot(event,1)">×</button>
-            <div class="slot-badge">2</div>
-          </div>
-          <div class="upzone img-slot" id="slot-2" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handleDropSlot(event,2)" onclick="triggerSlot(event,2)">
-            <div class="upzone-inner slot-ph" id="slot-ph-2"><div class="upzone-icon" style="font-size:22px">🖼️</div><div class="upzone-lbl" style="font-size:11px">Photo 3</div></div>
-            <img class="up-preview slot-img" id="prev-2" alt=""/>
-            <button class="upclear slot-clr" id="clr-2" onclick="clearSlot(event,2)">×</button>
-            <div class="slot-badge">3</div>
-          </div>
+        <label class="fl">Image URL (Main)</label>
+        <input class="fi" id="pm-iu" placeholder="https://..."/>
+      </div>
+      <div class="frow">
+        <div class="fg">
+          <label class="fl">Image URL 2</label>
+          <input class="fi" id="pm-iu2" placeholder="https://..."/>
         </div>
-        <input type="file" id="pm-file-0" accept="image/*" style="display:none" onchange="handleFileSlot(this.files[0],0)"/>
-        <input type="file" id="pm-file-1" accept="image/*" style="display:none" onchange="handleFileSlot(this.files[0],1)"/>
-        <input type="file" id="pm-file-2" accept="image/*" style="display:none" onchange="handleFileSlot(this.files[0],2)"/>
-        <input type="hidden" id="pm-img-val"/>
-        <input type="hidden" id="pm-img-val-1"/>
-        <input type="hidden" id="pm-img-val-2"/>
-        <div class="fhint">Tap a slot to upload · drag &amp; drop works · first image is the main display photo</div>
+        <div class="fg">
+          <label class="fl">Image URL 3</label>
+          <input class="fi" id="pm-iu3" placeholder="https://..."/>
+        </div>
       </div>
 
       <div class="fg">
@@ -713,10 +682,11 @@ function openPM(p) {
   document.getElementById('pm-bgt').value = p ? (p.bg_text || '') : '';
   document.getElementById('pm-ik').value = p ? (p.image_key || '') : '';
   document.getElementById('pm-act').value = (p && (p.active === 0 || p.active === false)) ? '0' : '1';
+  document.getElementById('pm-iu').value = p ? (p.image_url || '') : '';
+  document.getElementById('pm-iu2').value = p ? (p.image_url_2 || '') : '';
+  document.getElementById('pm-iu3').value = p ? (p.image_url_3 || '') : '';
   document.getElementById('pm-err').style.display = 'none';
   renderChips();
-  const imgUrls = p ? [p.image_url||'', p.image_url_2||'', p.image_url_3||''] : [];
-  resetImgUI(imgUrls);
   document.getElementById('pm-modal').classList.add('open');
 }
 
@@ -735,86 +705,7 @@ function renderChips() {
   ).join('');
 }
 
-/* ── IMAGE UPLOAD — 3 slots ────────────────────────── */
-function triggerSlot(e, i) {
-  if (e.target.classList.contains('slot-clr') || e.target.id === 'clr-'+i) return;
-  document.getElementById('pm-file-'+i).click();
-}
-
-function handleDropSlot(e, i) {
-  e.preventDefault();
-  document.getElementById('slot-'+i).classList.remove('drag');
-  const f = e.dataTransfer.files[0];
-  if (f && f.type.startsWith('image/')) handleFileSlot(f, i);
-}
-
-function handleFileSlot(f, i) {
-  if (!f) return;
-  // Validate file size (max 2MB per image)
-  const maxSize = 2 * 1024 * 1024; // 2MB
-  if (f.size > maxSize) {
-    toast(`Image too large (${(f.size / 1024 / 1024).toFixed(1)}MB). Max 2MB per image.`, 'terr');
-    return;
-  }
-  // Compress image before preview
-  const reader = new FileReader();
-  reader.onload = function(ev) {
-    const img = new Image();
-    img.onload = function() {
-      // Resize to max 1200px width while maintaining aspect ratio
-      const canvas = document.createElement('canvas');
-      const maxWidth = 1200;
-      const scale = Math.min(1, maxWidth / img.width);
-      canvas.width = img.width * scale;
-      canvas.height = img.height * scale;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-      // Convert to JPEG with 80% quality
-      const compressed = canvas.toDataURL('image/jpeg', 0.8);
-      setSlotPreview(compressed, i);
-    };
-    img.src = ev.target.result;
-  };
-  reader.readAsDataURL(f);
-}
-
-function setSlotPreview(src, i) {
-  const key = i === 0 ? 'pm-img-val' : 'pm-img-val-'+i;
-  document.getElementById(key).value = src;
-  const img = document.getElementById('prev-'+i);
-  img.src = src; img.style.display = 'block';
-  document.getElementById('slot-ph-'+i).style.display = 'none';
-  document.getElementById('clr-'+i).style.display = 'flex';
-}
-
-function clearSlot(e, i) {
-  e.stopPropagation();
-  const key = i === 0 ? 'pm-img-val' : 'pm-img-val-'+i;
-  document.getElementById(key).value = '';
-  document.getElementById('pm-file-'+i).value = '';
-  const img = document.getElementById('prev-'+i);
-  img.src = ''; img.style.display = 'none';
-  document.getElementById('slot-ph-'+i).style.display = 'flex';
-  document.getElementById('clr-'+i).style.display = 'none';
-}
-
-function resetImgUI(urls) {
-  // urls can be a single string (legacy) or array of up to 3
-  if (!Array.isArray(urls)) urls = urls ? [urls] : [];
-  for (let i = 0; i < 3; i++) {
-    document.getElementById('pm-file-'+i).value = '';
-    if (urls[i]) {
-      setSlotPreview(urls[i], i);
-    } else {
-      const key = i === 0 ? 'pm-img-val' : 'pm-img-val-'+i;
-      document.getElementById(key).value = '';
-      const img = document.getElementById('prev-'+i);
-      img.src = ''; img.style.display = 'none';
-      document.getElementById('slot-ph-'+i).style.display = 'flex';
-      document.getElementById('clr-'+i).style.display = 'none';
-    }
-  }
-}
+/* IMAGE UPLOAD — Reverted to URL inputs */
 
 async function saveProd() {
   const name = document.getElementById('pm-name').value.trim();
@@ -832,24 +723,17 @@ async function saveProd() {
     category: document.getElementById('pm-cat').value.trim(),
     bg_text: document.getElementById('pm-bgt').value.trim(),
     image_key: document.getElementById('pm-ik').value.trim(),
-    image_url: document.getElementById('pm-img-val').value.trim(),
-    image_url_2: document.getElementById('pm-img-val-1').value.trim() || '',
-    image_url_3: document.getElementById('pm-img-val-2').value.trim() || '',
+    image_url: document.getElementById('pm-iu').value.trim(),
+    image_url_2: document.getElementById('pm-iu2').value.trim(),
+    image_url_3: document.getElementById('pm-iu3').value.trim(),
     colours: pmC,
     active: parseInt(document.getElementById('pm-act').value)
   };
-  // Validate total payload size (rough estimate: base64 is ~33% larger)
-  const payloadSize = JSON.stringify(body).length;
-  if (payloadSize > 4.5 * 1024 * 1024) {
-    e.textContent = `Images are too large (${(payloadSize / 1024 / 1024).toFixed(1)}MB). Please use smaller images.`;
-    e.style.display = 'block';
-    return;
-  }
   try {
     e.textContent = 'Saving product…'; e.style.display = 'block'; e.style.color = '#8892a2';
     const r = await fetch(
       editPID ? `${API}/products/${editPID}` : `${API}/products`,
-      { method: editPID ? 'PUT' : 'POST', headers: { 'Content-Type': 'application/json', 'x-admin-key': KEY }, body: JSON.stringify(body), signal: AbortSignal.timeout(15000) }
+      { method: editPID ? 'PUT' : 'POST', headers: { 'Content-Type': 'application/json', 'x-admin-key': KEY }, body: JSON.stringify(body), signal: AbortSignal.timeout(30000) }
     );
     const j = await r.json(); if (!j.success) throw new Error(j.error);
     e.textContent = ''; e.style.display = 'none';
