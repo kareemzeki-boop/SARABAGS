@@ -718,6 +718,17 @@ function renderChips() {
 
 /* IMAGE UPLOAD — Reverted to URL inputs */
 
+function fixLink(u) {
+  if (!u) return '';
+  // Convert ImgBB viewer links (e.g., https://ibb.co/jYq4c3v) to direct image links
+  if (u.includes('ibb.co/') && !u.includes('i.ibb.co/')) {
+    const parts = u.split('/');
+    const id = parts[parts.length - 1] || parts[parts.length - 2];
+    if (id && id.length > 5) return `https://i.ibb.co/${id}/${id}.png`; // Rough guess, but usually works for ImgBB
+  }
+  return u;
+}
+
 async function saveProd() {
   const name = document.getElementById('pm-name').value.trim();
   const price = parseFloat(document.getElementById('pm-price').value);
@@ -734,9 +745,9 @@ async function saveProd() {
     category: document.getElementById('pm-cat').value.trim(),
     bg_text: document.getElementById('pm-bgt').value.trim(),
     image_key: document.getElementById('pm-ik').value.trim(),
-    image_url: document.getElementById('pm-iu').value.trim(),
-    image_url_2: document.getElementById('pm-iu2').value.trim(),
-    image_url_3: document.getElementById('pm-iu3').value.trim(),
+    image_url: fixLink(document.getElementById('pm-iu').value.trim()),
+    image_url_2: fixLink(document.getElementById('pm-iu2').value.trim()),
+    image_url_3: fixLink(document.getElementById('pm-iu3').value.trim()),
     colours: pmC,
     active: parseInt(document.getElementById('pm-act').value)
   };
@@ -744,14 +755,14 @@ async function saveProd() {
     e.textContent = 'Saving product…'; e.style.display = 'block'; e.style.color = '#8892a2';
     const r = await fetch(
       editPID ? `${API}/products/${editPID}` : `${API}/products`,
-      { method: editPID ? 'PUT' : 'POST', headers: { 'Content-Type': 'application/json', 'x-admin-key': KEY }, body: JSON.stringify(body), signal: AbortSignal.timeout(30000) }
+      { method: editPID ? 'PUT' : 'POST', headers: { 'Content-Type': 'application/json', 'x-admin-key': KEY }, body: JSON.stringify(body), signal: AbortSignal.timeout(60000) }
     );
     const j = await r.json(); if (!j.success) throw new Error(j.error);
     e.textContent = ''; e.style.display = 'none';
     closePM(); loadProducts(); toast(editPID ? 'Product updated ✓' : 'Product added ✓', 'tok');
   } catch (ex) {
     const msg = ex.name === 'TimeoutError' || ex.name === 'AbortError'
-      ? 'Save took too long. Check your connection and try again.'
+      ? 'Save took too long. The server might be waking up or your connection is slow. Please try again.'
       : ex.message;
     e.textContent = msg; e.style.display = 'block'; e.style.color = '#c05020';
   }
