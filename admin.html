@@ -650,16 +650,21 @@ async function loadProducts() {
   }
 }
 
+// Store products globally to avoid quote issues in inline handlers
+let _pCache = {};
+
 function renderProducts(list) {
   const g = document.getElementById('pg');
   if (!list.length) { g.innerHTML = `<div style="padding:60px;text-align:center;color:var(--muted);font-style:italic">No products yet. Add your first bag!</div>`; return; }
+  _pCache = {}; // Reset cache
   g.innerHTML = list.map(p => {
+    _pCache[p.id] = p; // Store by ID
     const active = p.active !== 0 && p.active !== false;
     const cols = Array.isArray(p.colours) ? p.colours : [];
     const thumb = p.image_url
       ? `<div class="pthumb"><img src="${p.image_url}" alt="" onerror="this.parentElement.innerHTML='${(p.bg_text || p.name).replace(/'/g, "\\'")}'" /></div>`
       : `<div class="pthumb">${p.bg_text || p.name}</div>`;
-    const pj = JSON.stringify(p).replace(/\\/g, '\\\\').replace(/"/g, '&quot;');
+    
     return `<div class="pcard${active ? '' : ' inactive'}">
       ${thumb}
       <div class="pbody">
@@ -671,12 +676,17 @@ function renderProducts(list) {
           ${cols.map(c => `<span class="tag">${c}</span>`).join('')}
         </div>
         <div class="pac">
-          <button class="btn bg bsm" onclick='openPM(${pj})'>✏️ Edit</button>
+          <button class="btn bg bsm" onclick="openPMById(${p.id})">✏️ Edit</button>
           <button class="btn bd bsm" onclick="delProd(${p.id},'${p.name.replace(/'/g, "\\'")}')">Delete</button>
         </div>
       </div>
     </div>`;
   }).join('');
+}
+
+function openPMById(id) {
+  const p = _pCache[id];
+  if (p) openPM(p);
 }
 
 /* ── PRODUCT MODAL ────────────────────────────────── */
@@ -720,11 +730,16 @@ function renderChips() {
 
 function fixLink(u) {
   if (!u) return '';
-  // Convert ImgBB viewer links (e.g., https://ibb.co/jYq4c3v) to direct image links
+  // 1. If user pasted an HTML embed code (like from ImgBB), extract just the src URL
+  if (u.includes('<img') && u.includes('src=')) {
+    const m = u.match(/src="([^"]+)"/);
+    if (m && m[1]) u = m[1];
+  }
+  // 2. Convert ImgBB viewer links (e.g., https://ibb.co/jYq4c3v) to direct image links
   if (u.includes('ibb.co/') && !u.includes('i.ibb.co/')) {
     const parts = u.split('/');
     const id = parts[parts.length - 1] || parts[parts.length - 2];
-    if (id && id.length > 5) return `https://i.ibb.co/${id}/${id}.png`; // Rough guess, but usually works for ImgBB
+    if (id && id.length > 5) return `https://i.ibb.co/${id}/${id}.png`;
   }
   return u;
 }
